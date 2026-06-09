@@ -1,12 +1,15 @@
 <script lang="ts">
-  import { type Option } from "@fering-org/functional-helper"
-
   import { concat } from "./lib/utils"
   import CellStorage from "./stores/cellStorage"
   import NavBar from "./components/NavBar.svelte"
   import Table from "./components/Table.svelte"
+  import Modal from "./components/Modal.svelte"
 
   let cells: CellStorage = CellStorage.create()
+
+  let isModal = false
+  function openModal() { isModal = true }
+  function closeModal() { isModal = false }
 </script>
 
 <main>
@@ -42,11 +45,26 @@
           <Table
             cells={cells}
             onClick={cellIndex => {
-              /* todo */
+              openModal()
             }}
           />
         </div>
       </div>
+      <Modal
+        bind:open={isModal}
+        title="Пример модального окна"
+        on:close={closeModal}
+      >
+        <p>Текст внутри модального окна. Здесь можно разместить форму или сообщение.</p>
+
+        <button slot="secondary" class="px-3 py-1 rounded border" on:click={closeModal}>
+          Отмена
+        </button>
+        <button slot="primary" class="px-3 py-1 bg-blue-600 text-white rounded">
+          Сохранить
+        </button>
+      </Modal>
+
     </div>
   </div>
 </main>
