@@ -48,9 +48,13 @@
         "flex",
         "items-center",
         "fill-[#222034]",
+        "dark:fill-[#DDDFCB]",
         "hover:fill-[#45283c]",
+        "dark:hover:fill-[#BAD7C3]",
         "focus:fill-[#663931]",
+        "dark:focus:fill-[#99C6CE]",
         "active:fill-[#663931]",
+        "dark:active:fill-[#99C6CE]",
       ])}
       href="https://github.com/lapkiteam/IfologyTextbook"
       target="_blank"
