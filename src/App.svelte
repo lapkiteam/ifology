@@ -4,7 +4,7 @@
   import { concat } from "./lib/utils"
   import CellStorage from "./stores/cellStorage"
   import NavBar from "./components/NavBar.svelte"
-  import GameCanvas from "./components/GameCanvas.svelte"
+  import Table from "./components/Table.svelte"
 
   let cells: CellStorage = CellStorage.create()
 </script>
@@ -37,7 +37,7 @@
           "flex-grow",
           "overflow-y-auto",
         ])}>
-          <GameCanvas
+          <Table
             cells={cells}
             onClick={cellIndex => {
               /* todo */
