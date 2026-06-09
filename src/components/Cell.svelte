@@ -49,8 +49,7 @@
   {/if}
   <div class={concat([
     "w-full",
-    "font-bold",
-    "text-[14px]",
+    "text-lg",
     "leading-[17px]",
     "text-center",
     "hyphens-auto",
