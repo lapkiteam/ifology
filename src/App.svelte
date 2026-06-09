@@ -20,6 +20,8 @@
       "h-dvh",
       "h-[calc(var(--vh,_1vh)_*_100)]",
       "bg-[#e5e5e5]",
+      "dark:bg-gray-800",
+      "dark:text-white",
       "flex",
       "flex-col",
     ])}>
