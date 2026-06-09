@@ -5,34 +5,20 @@ export type CellStorage = CellData[]
 
 export namespace CellStorage {
   export function create(): CellStorage {
-    return [
-      "Лучшая игра всех времен",
-      "Лучший сюжет",
-      "Лучший визуал",
-      "Когда-нибудь я завершу ее...",
-      "Сильно повлияла на меня",
-      "Лучшая боёвка",
-      "Тебе не нравится, а остальным — да",
-      "Тебе нравится, а остальным — нет",
-      "Недооцененная",
-      "Переоцененная",
-      "Почему мне это нравится?",
-      "Всегда к ней возвращаюсь",
-      "Лучшая атмосфера",
-      "Лекарство от плохого дня",
-      "Лучший протагонист",
-      "Отдых после работы",
-      "Самое большое разочарование",
-      "Игра из \"того самого\" времени",
-      "Она не лучшая, но прикольная",
-      "Преступно забыта",
-      "Депрессивная игра",
-      "Лучшая активная франшиза",
-      "Лучший саундтрек",
-      "Обычно я такое не люблю, но...",
-    ].map(description => ({
+    const items: [string, string | undefined][] = [
+      ["QSP", "https://placehold.co/600x400"],
+      ["URQ", undefined],
+      ["Instead", "https://placehold.co/400x600"],
+      ["QSP", "https://placehold.co/600x400"],
+      ["Instead", undefined],
+      ["Instead", "https://placehold.co/400x600"],
+      ["Гильдия квестов", "https://placehold.co/600x400"],
+      ["URQ", undefined],
+      ["Instead", "https://placehold.co/400x600"],
+    ]
+    return items.map(([description, imageSrc]) => ({
       description,
-      imageSrc: undefined
+      imageSrc,
     }))
   }
 
