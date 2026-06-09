@@ -56,7 +56,7 @@
         "active:fill-[#663931]",
         "dark:active:fill-[#99C6CE]",
       ])}
-      href="https://github.com/lapkiteam/IfologyTextbook"
+      href="https://github.com/lapkiteam/ifology"
       target="_blank"
     >
       <svg viewBox="0 0 16 16">
