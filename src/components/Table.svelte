@@ -19,8 +19,7 @@
   "flex-row",
   "flex-wrap",
   "justify-center",
-  "gap-x-[50px]",
-  "gap-y-[58px]",
+  "gap-y-4",
   "overflow-y-auto",
 ])}>
   {#each cells as cell, cellIndex}

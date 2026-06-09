@@ -15,8 +15,8 @@
     "flex",
     "flex-col",
     "gap-[4px]",
-    "w-32",
-    "h-[165px]",
+    "w-[180px]",
+    "h-[180px]",
   ])}
   on:click={_ => {
     if (onClick) { onClick() }
@@ -52,7 +52,6 @@
     "text-lg",
     "leading-[17px]",
     "text-center",
-    "hyphens-auto",
   ])}>
     {description}
   </div>
