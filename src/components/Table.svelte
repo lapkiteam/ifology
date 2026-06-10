@@ -24,7 +24,7 @@
 ])}>
   {#each cells as cell, cellIndex}
     <Cell
-      description={cell.description}
+      description={cell.title}
       imageSrc={cell.imageSrc}
       onClick={() => {
         if (onClick) {

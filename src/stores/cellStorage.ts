@@ -7,87 +7,87 @@ export namespace CellStorage {
   export function create(): CellStorage {
     const items: CellStorage = [
       {
-        description: "Аперо",
+        title: "Аперо",
         imageSrc: "./items/apero.png",
       },
       {
-        description: "Гильдия авторов",
+        title: "Гильдия авторов",
         imageSrc: "./items/authors-guild.png",
       },
       {
-        description: "Axma",
+        title: "Axma",
         imageSrc: "./items/axma.png",
       },
       {
-        description: "Choices",
+        title: "Choices",
         imageSrc: "./items/choices.png",
       },
       {
-        description: "FireURQ",
+        title: "FireURQ",
         imageSrc: "./items/furq.png",
       },
       {
-        description: "Книги-игры",
+        title: "Книги-игры",
         imageSrc: "./items/gamebook.png",
       },
       {
-        description: "Instead",
+        title: "Instead",
         imageSrc: "./items/instead.png",
       },
       {
-        description: "Instory",
+        title: "Instory",
         imageSrc: "./items/instory.png",
       },
       {
-        description: "Meander",
+        title: "Meander",
         imageSrc: "./items/meander.png",
       },
       {
-        description: "MUD'ы",
+        title: "MUD'ы",
         imageSrc: "./items/mud.png",
       },
       {
-        description: "MURQ",
+        title: "MURQ",
         imageSrc: "./items/murq.png",
       },
       {
-        description: "Парсеры",
+        title: "Парсеры",
         imageSrc: "./items/parsers.png",
       },
       {
-        description: "QSP",
+        title: "QSP",
         imageSrc: "./items/qsp.png",
       },
       {
-        description: "Квестбук",
+        title: "Квестбук",
         imageSrc: "./items/questbook.png",
       },
       {
-        description: "RenPy",
+        title: "RenPy",
         imageSrc: "./items/renpy.png",
       },
       {
-        description: "Rinform",
+        title: "Rinform",
         imageSrc: "./items/rinform.png",
       },
       {
-        description: "Rtads",
+        title: "Rtads",
         imageSrc: "./items/rtads.png",
       },
       {
-        description: "Storymaze2.0",
+        title: "Storymaze2.0",
         imageSrc: "./items/storymaze2.0.png",
       },
       {
-        description: "ТК: играй, пиши",
+        title: "ТК: играй, пиши",
         imageSrc: "./items/tk.png",
       },
       {
-        description: "Twine",
+        title: "Twine",
         imageSrc: "./items/twine.png",
       },
       {
-        description: "Визуальные новеллы",
+        title: "Визуальные новеллы",
         imageSrc: "./items/vn.png",
       }
     ]

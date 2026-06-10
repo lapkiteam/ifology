@@ -2,7 +2,7 @@ import update from "immutability-helper"
 import { type Option } from "@fering-org/functional-helper"
 
 export type CellData = {
-  description: string
+  title: string
   imageSrc: Option<string>
 }
 
