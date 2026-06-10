@@ -74,7 +74,9 @@ export namespace CellStorage {
       {
         title: "Парсеры",
         imageSrc: "./items/parsers.png",
-        description: "Пасеры — для сверхразумов.",
+        description: [
+          "Парсеры — игры для сверхразумов. Глагол не найден."
+        ].join("\n"),
       },
       {
         title: "QSP",
