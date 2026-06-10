@@ -81,7 +81,13 @@ export namespace CellStorage {
       {
         title: "QSP",
         imageSrc: "./items/qsp.png",
-        description: "Каждый автор пытается [Куспом](https://ifwiki.ru/QSP) сделать что-то, для чего он не предназначен.",
+        description: [
+          "> Doom на QSP пока не писали?",
+          ">",
+          "> — Первый вопрос новичка в исполнении [Эдуарда из ИФ чат (чистилище)](https://t.me/ifiction_group/141292)",
+          "",
+          "Каждый автор пытается сделать [Куспом](https://ifwiki.ru/QSP) то, для чего он не предназначен.",
+        ].join("\n")
       },
       {
         title: "Квестбук",
