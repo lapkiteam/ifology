@@ -6,6 +6,7 @@
   import NavBar from "./components/NavBar.svelte"
   import Table from "./components/Table.svelte"
   import Modal from "./components/Modal.svelte"
+  import Markdown from "./components/Markdown.svelte";
 
   let cells: CellStorage = CellStorage.create()
 
@@ -105,7 +106,9 @@
           >
         </div>
 
-        <p class="mt-2">{modalDescription}</p>
+        <div class="mt-2">
+          <Markdown allowHtml content={modalDescription} />
+        </div>
 
         <button slot="secondary" class="px-3 py-1 rounded border" on:click={modalClose}>
           Закрыть
