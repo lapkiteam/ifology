@@ -2,6 +2,8 @@
   import { marked, Renderer } from 'marked'
   import DOMPurify from 'dompurify'
 
+  import { concat } from '../lib/utils'
+
   export let content = ''
   export let allowHtml = false
 
@@ -9,12 +11,16 @@
 
   const renderer: Partial<Renderer> = {
     link({ href, title, tokens }) {
-      const attributes = [
+      const attributes = concat([
         `href="${href}"`,
-        title && ` title="${title}"`,
+        `class="${concat([
+          "text-blue-800",
+          "dark:text-blue-400",
+        ])}"`,
+        title ? ` title="${title}"` : "",
         `target="_blank"`,
         `rel="noopener noreferrer"`,
-      ].join(" ")
+      ])
       const text = this.parser?.parseInline(tokens)
       return `<a ${attributes}>${text}</a>`
     }
