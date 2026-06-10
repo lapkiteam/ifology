@@ -43,7 +43,7 @@ export namespace CellStorage {
         title: "Книги-игры",
         imageSrc: "./items/gamebook.png",
         description: [
-          "[Книга-игра](https://ifwiki.ru/Книга-игра)"
+          "[Книги-игры](https://ifwiki.ru/Книга-игра) — [трад](https://knowyourmeme.com/memes/cultures/trad)ионные игры ИФни и первые в своем роде."
         ].join("\n"),
       },
       {
