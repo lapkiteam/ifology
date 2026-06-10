@@ -105,7 +105,7 @@
           >
         </div>
 
-        <p>{modalDescription}</p>
+        <p class="mt-2">{modalDescription}</p>
 
         <button slot="secondary" class="px-3 py-1 rounded border" on:click={modalClose}>
           Закрыть
