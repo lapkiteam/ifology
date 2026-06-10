@@ -36,7 +36,9 @@ export namespace CellStorage {
       {
         title: "Книги-игры",
         imageSrc: "./items/gamebook.png",
-        description: undefined,
+        description: [
+          "[Книга-игра](https://ifwiki.ru/Книга-игра)"
+        ].join("\n"),
       },
       {
         title: "Instead",
@@ -76,7 +78,9 @@ export namespace CellStorage {
       {
         title: "Квестбук",
         imageSrc: "./items/questbook.png",
-        description: undefined,
+        description: [
+          // todo
+        ].join("\n"),
       },
       {
         title: "RenPy",
@@ -97,7 +101,7 @@ export namespace CellStorage {
         title: "Storymaze2.0",
         imageSrc: "./items/storymaze2.0.png",
         description: [
-          "Сторимейз 2.0 — это админ оригинального Storymaze. Говорит про телеграм бота, который сам пишет или помогает писать интерактивную историю с помощью ИИ и на основе анализа топа-100 опубликованных ранее сторимейзов."
+          "Сторимейз 2.0 — это админ оригинального [Storymaze](https://ifwiki.ru/Storymaze). Говорит про телеграм бота, который сам пишет или помогает писать интерактивную историю с помощью ИИ и на основе анализа топа-100 опубликованных ранее сторимейзов."
         ].join("\n"),
       },
       {
