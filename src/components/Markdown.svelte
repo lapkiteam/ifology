@@ -2,7 +2,7 @@
   import { marked, Renderer } from 'marked'
   import DOMPurify from 'dompurify'
 
-  export let content = ''       // markdown string
+  export let content = ''
   export let allowHtml = false
 
   let html = ''
@@ -21,12 +21,19 @@
     breaks: false,
   })
 
+  DOMPurify.setConfig({ ADD_ATTR: ['target'] })
+
+  DOMPurify.addHook('afterSanitizeAttributes', (node) => {
+    if (node.tagName === 'A' && node.getAttribute('target') === '_blank') {
+      if (!node.getAttribute('rel')) node.setAttribute('rel', 'noopener noreferrer')
+    }
+  })
+
   $: {
     html = marked.parse(content, {}) as string
     if (!allowHtml) {
       html = DOMPurify.sanitize(html, { ALLOWED_TAGS: undefined })
     } else {
-      // fix: убирает `target="_blank"` из <a>
       html = DOMPurify.sanitize(html)
     }
   }
