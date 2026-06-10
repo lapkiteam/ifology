@@ -9,11 +9,16 @@
 
   const renderer: Partial<Renderer> = {
     link({ href, title, tokens }) {
+      const attributes = [
+        `href="${href}"`,
+        title && ` title="${title}"`,
+        `target="_blank"`,
+        `rel="noopener noreferrer"`,
+      ].join(" ")
       const text = this.parser?.parseInline(tokens)
-      const titleAttr = title ? ` title="${title}"` : ''
-      return `<a href="${href}"${titleAttr} target="_blank" rel="noopener noreferrer">${text}</a>`
+      return `<a ${attributes}>${text}</a>`
     }
-  };
+  }
 
   marked.use({ renderer })
 
@@ -55,6 +60,9 @@
     padding: 0.75rem;
     border-radius: 6px;
     overflow: auto;
+  }
+  .markdown-render a {
+    color: #3180c5;
   }
   .markdown-render code {
     background: rgba(27,31,35,0.05);
