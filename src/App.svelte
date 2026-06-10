@@ -1,15 +1,42 @@
 <script lang="ts">
+  import { Option } from "@fering-org/functional-helper"
+
   import { concat } from "./lib/utils"
-  import CellStorage from "./stores/cellStorage"
+  import CellStorage, { type CellIndex } from "./stores/cellStorage"
   import NavBar from "./components/NavBar.svelte"
   import Table from "./components/Table.svelte"
   import Modal from "./components/Modal.svelte"
 
   let cells: CellStorage = CellStorage.create()
 
-  let isModal = false
-  function openModal() { isModal = true }
-  function closeModal() { isModal = false }
+  let modalState: Option<CellIndex> = Option.mkNone()
+
+  $: modalOpened = Option.isSome(modalState)
+
+  $: modalTitle = (() => {
+    return Option.reduce(
+      modalState,
+      (modalState) => cells[modalState].title,
+      () => "Элемент не найден"
+    )
+  })()
+
+  $: modalDescription = (() => {
+    return Option.reduce(
+      modalState,
+      (modalState) =>
+        cells[modalState].description || "Описание отсутствует",
+      () => "Элемент не найден"
+    )
+  })()
+
+  function modalOpen(index: CellIndex) {
+    modalState = Option.mkSome(index)
+  }
+
+  function modalClose() {
+    modalState = Option.mkNone()
+  }
 </script>
 
 <main>
@@ -45,26 +72,22 @@
           <Table
             cells={cells}
             onClick={cellIndex => {
-              openModal()
+              modalOpen(cellIndex)
             }}
           />
         </div>
       </div>
       <Modal
-        bind:open={isModal}
-        title="Пример модального окна"
-        on:close={closeModal}
+        bind:open={modalOpened}
+        bind:title={modalTitle}
+        on:close={modalClose}
       >
-        <p>Текст внутри модального окна. Здесь можно разместить форму или сообщение.</p>
+        <p>{modalDescription}</p>
 
-        <button slot="secondary" class="px-3 py-1 rounded border" on:click={closeModal}>
-          Отмена
-        </button>
-        <button slot="primary" class="px-3 py-1 bg-blue-600 text-white rounded">
-          Сохранить
+        <button slot="secondary" class="px-3 py-1 rounded border" on:click={modalClose}>
+          Закрыть
         </button>
       </Modal>
-
     </div>
   </div>
 </main>

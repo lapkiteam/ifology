@@ -4,6 +4,7 @@ import { type Option } from "@fering-org/functional-helper"
 export type CellData = {
   title: string
   imageSrc: Option<string>
+  description: Option<string>
 }
 
 export namespace CellData {
