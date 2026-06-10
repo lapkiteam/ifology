@@ -11,12 +11,18 @@ export namespace CellStorage {
       {
         title: "Аперо",
         imageSrc: "./items/apero.png",
-        description: "apero",
+        description: [
+          "[Агент007](https://ifwiki.ru/Агент007) — создатель [Аперо](https://ifwiki.ru/Аперо). Не путать с Агент Лапки.",
+          "",
+          "Аперо (аперитив) — это вечерний ритуал расслабления и общения за легкими напитками и закусками перед ужином.",
+        ].join("\n"),
       },
       {
         title: "Гильдия авторов",
         imageSrc: "./items/authors-guild.png",
-        description: undefined,
+        description: [
+          "Гильдия Авторов Интерактивной Литературы (ГАИЛ). Раньше их ИГИЛом называли."
+        ].join("\n"),
       },
       {
         title: "Axma",
@@ -31,12 +37,14 @@ export namespace CellStorage {
       {
         title: "FireURQ",
         imageSrc: "./items/furq.png",
-        description: undefined,
+        description: "Синее пламя — иконка платформы.",
       },
       {
         title: "Книги-игры",
         imageSrc: "./items/gamebook.png",
-        description: undefined,
+        description: [
+          "[Книги-игры](https://ifwiki.ru/Книга-игра) — [трад](https://knowyourmeme.com/memes/cultures/trad)ионные игры ИФни и первые в своем роде."
+        ].join("\n"),
       },
       {
         title: "Instead",
@@ -51,32 +59,42 @@ export namespace CellStorage {
       {
         title: "Meander",
         imageSrc: "./items/meander.png",
-        description: undefined,
+        description: "14-17 лет — средний возраст участников Мурмяндера. Об этом говорит [опрос на их канале в ТГ](https://t.me/meanderRU/1655). Вот и думайте.",
       },
       {
         title: "MUD'ы",
         imageSrc: "./items/mud.png",
-        description: undefined,
+        description: "Mud — с английского грязь.",
       },
       {
         title: "MURQ",
         imageSrc: "./items/murq.png",
-        description: undefined,
+        description: "Кот, потому что [мурк](https://github.com/realsonic/MURQ).",
       },
       {
         title: "Парсеры",
         imageSrc: "./items/parsers.png",
-        description: undefined,
+        description: [
+          "Парсеры — игры для сверхразумов. Глагол не найден."
+        ].join("\n"),
       },
       {
         title: "QSP",
         imageSrc: "./items/qsp.png",
-        description: undefined,
+        description: [
+          "> Doom на QSP пока не писали?",
+          ">",
+          "> — Первый вопрос новичка в исполнении [Эдуарда из ИФ чат (чистилище)](https://t.me/ifiction_group/141292)",
+          "",
+          "Каждый автор пытается сделать [Куспом](https://ifwiki.ru/QSP) то, для чего он не предназначен.",
+        ].join("\n")
       },
       {
         title: "Квестбук",
         imageSrc: "./items/questbook.png",
-        description: undefined,
+        description: [
+          // todo
+        ].join("\n"),
       },
       {
         title: "RenPy",
@@ -96,22 +114,28 @@ export namespace CellStorage {
       {
         title: "Storymaze2.0",
         imageSrc: "./items/storymaze2.0.png",
-        description: undefined,
+        description: [
+          "Сторимейз 2.0 — это админ оригинального [Storymaze](https://ifwiki.ru/Storymaze). Говорит про телеграм бота, который сам пишет или помогает писать интерактивную историю с помощью ИИ и на основе анализа топа-100 опубликованных ранее сторимейзов."
+        ].join("\n"),
       },
       {
         title: "ТК: играй, пиши",
         imageSrc: "./items/tk.png",
-        description: undefined,
+        description: [
+          "[elChem](https://ifwiki.ru/Стрельников,_Артём) — химик по профессии. Он — главный представитель ТК.",
+          "",
+          "[Ошейник](https://ifwiki.ru/Ошейник) — магнус опус всея ТК.",
+        ].join("\n"),
       },
       {
         title: "Twine",
         imageSrc: "./items/twine.png",
-        description: undefined,
+        description: "Twine — c английского шпагат, бечёвка, обвивать.",
       },
       {
         title: "Визуальные новеллы",
         imageSrc: "./items/vn.png",
-        description: undefined,
+        description: "Япония, кимоно, сакура.",
       }
     ]
     return items
