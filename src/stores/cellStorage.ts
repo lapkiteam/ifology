@@ -41,7 +41,7 @@ export namespace CellStorage {
       {
         title: "Instead",
         imageSrc: "./items/instead.png",
-        description: undefined,
+        description: "Красноглазые линуксоиды, сектанты, [квантовый кот](https://ifwiki.ru/Возвращение_квантового_кота), лифт, [лесник](https://ifwiki.ru/Вызволение_детерминированного_лесника)",
       },
       {
         title: "Instory",
