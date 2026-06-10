@@ -9,18 +9,9 @@
 
   $: {
     marked.setOptions({
-      mangle: false,
-      headerIds: true,
       breaks: false,
     })
-    html = marked.parse(content, {
-      mangle: false,
-      headerIds: true,
-      gfm: true,
-      smartLists: true,
-      smartypants: true,
-      renderer: undefined,
-    })
+    html = marked.parse(content, {}) as string
     if (!allowHtml) {
       html = DOMPurify.sanitize(html, { ALLOWED_TAGS: undefined })
     } else {
