@@ -21,6 +21,15 @@
     )
   })()
 
+  $: modalImage = (() => {
+    return Option.reduce(
+      modalState,
+      (modalState) =>
+        cells[modalState].imageSrc,
+      () => "Элемент не найден",
+    )
+  })()
+
   $: modalDescription = (() => {
     return Option.reduce(
       modalState,
@@ -82,6 +91,20 @@
         bind:title={modalTitle}
         on:close={modalClose}
       >
+        <div class={concat([
+          "flex",
+          "justify-center",
+        ])}>
+          <img
+            class={concat([
+              "size-32",
+              "object-contain",
+            ])}
+            src={modalImage}
+            alt=""
+          >
+        </div>
+
         <p>{modalDescription}</p>
 
         <button slot="secondary" class="px-3 py-1 rounded border" on:click={modalClose}>
