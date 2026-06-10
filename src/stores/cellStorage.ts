@@ -11,7 +11,11 @@ export namespace CellStorage {
       {
         title: "Аперо",
         imageSrc: "./items/apero.png",
-        description: "apero",
+        description: [
+          "[Агент007](https://ifwiki.ru/Агент007) — создатель [Аперо](https://ifwiki.ru/Аперо). Не путать с Агент Лапки.",
+          "",
+          "Аперо (аперитив) — это вечерний ритуал расслабления и общения за легкими напитками и закусками перед ужином.",
+        ].join("\n"),
       },
       {
         title: "Гильдия авторов",
