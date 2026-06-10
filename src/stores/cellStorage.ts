@@ -16,7 +16,9 @@ export namespace CellStorage {
       {
         title: "Гильдия авторов",
         imageSrc: "./items/authors-guild.png",
-        description: undefined,
+        description: [
+          "Гильдия Авторов Интерактивной Литературы (ГАИЛ). Раньше их ИГИЛом называли."
+        ].join("\n"),
       },
       {
         title: "Axma",
