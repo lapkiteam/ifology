@@ -20,13 +20,6 @@
       "gap-[10px]",
     ])}
   >
-    <img
-      class={concat([
-        "w-fit", "h-fit",
-      ])}
-      src="./table-favorite-games.webp"
-      alt="logo"
-    >
     <div
       class={concat([
         "text-xl",
