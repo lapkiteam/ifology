@@ -81,7 +81,7 @@ export namespace CellStorage {
       {
         title: "QSP",
         imageSrc: "./items/qsp.png",
-        description: "Каждый автор пытается Куспом сделать что-то, для чего он не предназначен.",
+        description: "Каждый автор пытается [Куспом](https://ifwiki.ru/QSP) сделать что-то, для чего он не предназначен.",
       },
       {
         title: "Квестбук",
