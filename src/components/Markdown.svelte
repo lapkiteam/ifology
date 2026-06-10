@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { marked } from 'marked'
+  import { marked, Renderer } from 'marked'
   import DOMPurify from 'dompurify'
 
   export let content = ''       // markdown string
@@ -7,14 +7,26 @@
 
   let html = ''
 
+  const renderer: Partial<Renderer> = {
+    link({ href, title, tokens }) {
+      const text = this.parser?.parseInline(tokens)
+      const titleAttr = title ? ` title="${title}"` : ''
+      return `<a href="${href}"${titleAttr} target="_blank" rel="noopener noreferrer">${text}</a>`
+    }
+  };
+
+  marked.use({ renderer })
+
+  marked.setOptions({
+    breaks: false,
+  })
+
   $: {
-    marked.setOptions({
-      breaks: false,
-    })
     html = marked.parse(content, {}) as string
     if (!allowHtml) {
       html = DOMPurify.sanitize(html, { ALLOWED_TAGS: undefined })
     } else {
+      // fix: убирает `target="_blank"` из <a>
       html = DOMPurify.sanitize(html)
     }
   }
