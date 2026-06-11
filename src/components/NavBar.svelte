@@ -9,6 +9,7 @@
     "px-[8px]",
     "py-[4px]",
     "flex",
+    "dark:bg-gray-900",
   ])}
 >
   <div
