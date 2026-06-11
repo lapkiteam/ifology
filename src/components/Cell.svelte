@@ -17,6 +17,7 @@
     "gap-[4px]",
     "w-[180px]",
     "h-[180px]",
+    "mx-0.5",
   ])}
   on:click={_ => {
     if (onClick) { onClick() }
