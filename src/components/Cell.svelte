@@ -14,10 +14,8 @@
   class={concat([
     "flex",
     "flex-col",
-    "gap-[4px]",
-    "w-[180px]",
-    "h-[180px]",
-    "mx-0.5",
+    "gap-1",
+    "h-44",
   ])}
   on:click={_ => {
     if (onClick) { onClick() }

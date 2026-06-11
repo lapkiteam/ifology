@@ -68,24 +68,19 @@
       <NavBar />
       <div class={concat([
         "size-full",
-        "px-[4px]",
+        "px-2",
         "flex",
         "flex-col",
         "items-center",
         "gap-[2px]",
         "overflow-y-auto",
       ])}>
-        <div class={concat([
-          "flex-grow",
-          "overflow-y-auto",
-        ])}>
-          <Table
-            cells={cells}
-            onClick={cellIndex => {
-              modalOpen(cellIndex)
-            }}
-          />
-        </div>
+        <Table
+          cells={cells}
+          onClick={cellIndex => {
+            modalOpen(cellIndex)
+          }}
+        />
       </div>
       <Modal
         bind:open={modalOpened}
