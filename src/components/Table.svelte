@@ -14,13 +14,10 @@
 <div class={concat([
   "w-full",
   "h-full",
-  "py-[24px]",
-  "flex",
-  "flex-row",
-  "flex-wrap",
-  "justify-center",
+  "grid",
+  "grid-cols-[repeat(auto-fill,minmax(165px,1fr))]",
+  "gap-x-2",
   "gap-y-4",
-  "overflow-y-auto",
 ])}>
   {#each cells as cell, cellIndex}
     <Cell
