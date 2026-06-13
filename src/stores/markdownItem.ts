@@ -1,5 +1,13 @@
 import P from "parsimmon"
-import { Result } from "@fering-org/functional-helper"
+import { Result, UnionCase } from "@fering-org/functional-helper"
+
+export type MardownItem = {
+  Frontmatter: string
+  Content: string
+}
+
+export type MarkdownItemParserError =
+  | UnionCase<"FrontmatterError", P.Failure>
 
 export namespace MardownItemParser {
   const parserRawFrontmatter = (() => {
@@ -38,7 +46,20 @@ export namespace MardownItemParser {
     }
   }
 
-  export function parse(fileContent: string) {
-
+  export function parse(
+    fileContent: string
+  ): Result<MardownItem, MarkdownItemParserError> {
+    const frontmatterResult = parseRawFrontmatter(fileContent)
+    if (frontmatterResult[0] === "Error") {
+      return Result.mkError(
+        UnionCase.mkUnionCase("FrontmatterError", frontmatterResult[1])
+      )
+    }
+    const frontmatter = frontmatterResult[1]
+    const content = fileContent.slice(frontmatter.endIndex.offset)
+    return Result.mkOk({
+      Frontmatter: frontmatter.value.join("\n"),
+      Content: content,
+    })
   }
 }

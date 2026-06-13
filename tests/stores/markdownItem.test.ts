@@ -70,3 +70,19 @@ describe("MardownItemParser.parseRawFrontmatter", () => {
     }))
   })
 })
+
+describe("MardownItemParser.parse", () => {
+  it("empty", () => {
+    expect(MardownItemParser.parse(
+      [
+        "---",
+        "authors:",
+        "---",
+        "Content"
+      ].join("\n")
+    )).toStrictEqual(Result.mkOk({
+      Frontmatter: "authors:",
+      Content: "Content",
+    }))
+  })
+})
