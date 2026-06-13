@@ -33,14 +33,17 @@ export namespace MardownItemParser {
    */
   export function parseRawFrontmatter(
     fileContent: string
-  ): Result<{ value: string[], endIndex: P.Index }, P.Failure> {
-    const marked = parserRawFrontmatter.mark()
-    const result = marked.parse(fileContent)
-    if (result.status) {
-      return Result.mkOk({
-        value: result.value.value,
-        endIndex: result.value.end,
+  ): Result<{ value: string[], rest: string }, P.Failure> {
+    const result = P.seqMap(
+      parserRawFrontmatter.skip(P.optWhitespace),
+      P.all,
+      (frontmatter, rest) => ({
+        value: frontmatter,
+        rest,
       })
+    ).parse(fileContent)
+    if (result.status) {
+      return Result.mkOk(result.value)
     } else {
       return Result.mkError(result)
     }
@@ -56,10 +59,9 @@ export namespace MardownItemParser {
       )
     }
     const frontmatter = frontmatterResult[1]
-    const content = fileContent.slice(frontmatter.endIndex.offset)
     return Result.mkOk({
       Frontmatter: frontmatter.value.join("\n"),
-      Content: content,
+      Content: frontmatter.rest,
     })
   }
 }

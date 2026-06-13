@@ -12,11 +12,7 @@ describe("MardownItemParser.parseRawFrontmatter", () => {
       ].join("\n")
     )).toStrictEqual(Result.mkOk({
       value: [],
-      endIndex: {
-        column: 4,
-        line: 2,
-        offset: 7,
-      },
+      rest: "",
     }))
   })
 
@@ -37,11 +33,7 @@ describe("MardownItemParser.parseRawFrontmatter", () => {
         "tags:",
         "  - hello",
       ],
-      endIndex: {
-        column: 4,
-        line: 6,
-        offset: 40,
-      },
+      rest: "",
     }))
   })
 
@@ -62,11 +54,20 @@ describe("MardownItemParser.parseRawFrontmatter", () => {
         "tags:",
         "",
       ],
-      endIndex: {
-        column: 4,
-        line: 6,
-        offset: 24,
-      },
+      rest: "",
+    }))
+  })
+
+  it("eof", () => {
+    expect(MardownItemParser.parseRawFrontmatter(
+      [
+        "---",
+        "---",
+        "   content"
+      ].join("\n")
+    )).toStrictEqual(Result.mkOk({
+      value: [],
+      rest: "content",
     }))
   })
 })
