@@ -1,8 +1,11 @@
 import P from "parsimmon"
 import { Result, UnionCase } from "@fering-org/functional-helper"
+import yaml, { YAMLException } from "js-yaml"
+
+export type Frontmatter = Result<Record<string, unknown>, YAMLException>
 
 export type MardownItem = {
-  Frontmatter: string
+  Frontmatter: Frontmatter
   Content: string
 }
 
@@ -59,8 +62,17 @@ export namespace MardownItemParser {
       )
     }
     const frontmatter = frontmatterResult[1]
+    const yml: Frontmatter = (() => {
+      try {
+        return Result.mkOk(yaml.load(
+          frontmatter.value.join("\n"), {}
+        )) as Frontmatter
+      } catch (error) {
+        return Result.mkError(error) as Frontmatter
+      }
+    })()
     return Result.mkOk({
-      Frontmatter: frontmatter.value.join("\n"),
+      Frontmatter: yml,
       Content: frontmatter.rest,
     })
   }

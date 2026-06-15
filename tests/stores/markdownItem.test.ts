@@ -78,11 +78,17 @@ describe("MardownItemParser.parse", () => {
       [
         "---",
         "authors:",
+        "  - iam",
+        "tags:",
+        "  - hello",
         "---",
         "Content"
       ].join("\n")
     )).toStrictEqual(Result.mkOk({
-      Frontmatter: "authors:",
+      Frontmatter: Result.mkOk({
+        authors: ["iam"],
+        tags: ["hello"],
+      }),
       Content: "Content",
     }))
   })
