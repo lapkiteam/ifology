@@ -4,6 +4,7 @@
   import { concat } from "../lib/utils"
   import { type CellStorage } from "../stores/cellStorage"
   import Result from "./Result.svelte"
+  import Deferred from "./Deferred.svelte"
   import Cell from "./Cell.svelte"
 
   export let cells: CellStorage
@@ -21,8 +22,8 @@
   "gap-y-4",
 ])}>
   {#each cells as cell, cellIndex}
-    {#if cell.case === "Resolved"}
-      <Result item={cell.fields} let:ok>
+    <Deferred deferred={cell} let:resolved>
+      <Result item={resolved} let:ok>
         <Cell
           description={ok.title}
           imageSrc={ok.imageSrc}
@@ -43,10 +44,6 @@
           })()}
         />
       </Result>
-    {:else if cell.case === "HasNotStartedYet"}
-      <div>HasNotStartedYet</div>
-    {:else if cell.case === "InProgress"}
-      <div>InProgress</div>
-    {/if}
+    </Deferred>
   {/each}
 </div>
