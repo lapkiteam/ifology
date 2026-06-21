@@ -3,7 +3,7 @@
 
   import { concat } from "../lib/utils"
   import { type CellStorage } from "../stores/cellStorage"
-  import ResultCellStorageItem from "./ResultCellStorageItem.svelte"
+  import Result from "./Result.svelte"
   import Cell from "./Cell.svelte"
 
   export let cells: CellStorage
@@ -22,7 +22,7 @@
 ])}>
   {#each cells as cell, cellIndex}
     {#if cell.case === "Resolved"}
-      <ResultCellStorageItem item={cell.fields} let:ok>
+      <Result item={cell.fields} let:ok>
         <Cell
           description={ok.title}
           imageSrc={ok.imageSrc}
@@ -42,7 +42,7 @@
             }
           })()}
         />
-      </ResultCellStorageItem>
+      </Result>
     {:else if cell.case === "HasNotStartedYet"}
       <div>HasNotStartedYet</div>
     {:else if cell.case === "InProgress"}
