@@ -1,5 +1,5 @@
 import update from "immutability-helper"
-import { Option } from "@fering-org/functional-helper"
+import { Option, Result } from "@fering-org/functional-helper"
 
 import { type MarkdownItem } from "./markdownItem"
 import { pipeInto } from "ts-functional-pipe"
@@ -61,6 +61,16 @@ export namespace CellData {
         description: { $set: markdownItem.Content }
       })
     )
+  }
+
+  export function toMarkdownItem(cellData: CellData): MarkdownItem {
+    return {
+      Frontmatter: Result.mkOk({
+        image: cellData.imageSrc,
+        title: cellData.title,
+      }),
+      Content: cellData.description || "",
+    }
   }
 }
 
