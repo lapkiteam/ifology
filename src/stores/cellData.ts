@@ -1,12 +1,33 @@
 import update from "immutability-helper"
-import { type Option } from "@fering-org/functional-helper"
+import { Option } from "@fering-org/functional-helper"
 
-import { MardownItem } from "./markdownItem"
+import { type MardownItem } from "./markdownItem"
+import { pipeInto } from "ts-functional-pipe"
 
 export type CellData = {
-  title: string
+  title: Option<string>
   imageSrc: Option<string>
   description: Option<string>
+}
+
+export namespace CellData {
+  export function create(): CellData {
+    return {
+      title: Option.mkNone(),
+      imageSrc: Option.mkNone(),
+      description: Option.mkNone(),
+    }
+  }
+}
+
+export namespace OptionExt {
+  // refactor: use function from functional-helper (see: https://github.com/gretmn102/functional-helper/issues/10)
+  export function ofUnknown<T>(value: unknown): Option<T> {
+    if (!value) {
+      return Option.mkNone()
+    }
+    return Option.mkSome(value as T)
+  }
 }
 
 export namespace CellData {
@@ -19,14 +40,27 @@ export namespace CellData {
     })
   }
 
-  export function ofMarkdownItem(markdownItem: MardownItem) {
-    const titleAndImageSrc = (() => {
-      if (markdownItem.Frontmatter[0] === "Error") {
-        return {
-          todo
+  export function ofMarkdownItem(markdownItem: MardownItem): CellData {
+    return pipeInto(
+      CellData.create(),
+      cellData => {
+        if (markdownItem.Frontmatter[0] === "Error") {
+          return cellData
         }
-      }
-    })
+        const frontmatter = markdownItem.Frontmatter[1]
+        return update(cellData, {
+          title: {
+            $set: OptionExt.ofUnknown<string>(frontmatter.title)
+          },
+          imageSrc: {
+            $set: OptionExt.ofUnknown<string>(frontmatter.image)
+          },
+        })
+      },
+      cellData => update(cellData, {
+        description: { $set: markdownItem.Content }
+      })
+    )
   }
 }
 
