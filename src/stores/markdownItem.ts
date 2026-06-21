@@ -9,10 +9,10 @@ export namespace FrontmatterParser {
   export function Parse(rawYaml: string): FrontmatterParserResult {
     try {
       return Result.mkOk(
-        yaml.load(rawYaml, {})
-      ) as FrontmatterParserResult
+        yaml.load(rawYaml, {}) as Record<string, unknown>
+      )
     } catch (error) {
-      return Result.mkError(error) as FrontmatterParserResult
+      return Result.mkError(error as YAMLException)
     }
   }
 }
