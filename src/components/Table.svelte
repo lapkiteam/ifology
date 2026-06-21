@@ -4,6 +4,7 @@
   import { concat } from "../lib/utils"
   import { type CellStorage } from "../stores/cellStorage"
   import ResultCellStorageItem from "./ResultCellStorageItem.svelte"
+  import Cell from "./Cell.svelte"
 
   export let cells: CellStorage
   export let onClick: Option<(cellIndex: number) => void> = undefined
@@ -21,24 +22,27 @@
 ])}>
   {#each cells as cell, cellIndex}
     {#if cell.case === "Resolved"}
-      <ResultCellStorageItem
-        item={cell.fields}
-        onClick={() => {
-          if (onClick) {
-            onClick(cellIndex)
-          }
-        }}
-        onDrop={() => {
-          if (onDrop) {
-            onDrop(cellIndex)
-          }
-        }}
-        onDropAllow={(() => {
-          if (onDropAllow) {
-            return () => onDropAllow(cellIndex)
-          }
-        })()}
-      />
+      <ResultCellStorageItem item={cell.fields} let:ok>
+        <Cell
+          description={ok.title}
+          imageSrc={ok.imageSrc}
+          onClick={() => {
+            if (onClick) {
+              onClick(cellIndex)
+            }
+          }}
+          onDrop={() => {
+            if (onDrop) {
+              onDrop(cellIndex)
+            }
+          }}
+          onDropAllow={(() => {
+            if (onDropAllow) {
+              return () => onDropAllow(cellIndex)
+            }
+          })()}
+        />
+      </ResultCellStorageItem>
     {:else if cell.case === "HasNotStartedYet"}
       <div>HasNotStartedYet</div>
     {:else if cell.case === "InProgress"}
