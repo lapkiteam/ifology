@@ -18,6 +18,43 @@ export type DeferredCellStorageItem = Deferred<ResultCellStorageItem>
 export type CellStorage = DeferredCellStorageItem[]
 
 export namespace CellStorage {
+  function loadItem(
+    url: string,
+    index: number,
+    updating: (itemIndex: number, updatedItem: DeferredCellStorageItem) => void,
+  ) {
+    fetch(url)
+      .then(response => {
+        response.text()
+          .then(rawMarkdown => {
+            updating(index, pipeInto(
+              rawMarkdown,
+              rawMarkdown => pipeInto(
+                MarkdownItemParser.parse(rawMarkdown),
+                result => Result.reduce(
+                  result,
+                  ok => Result.mkOk(
+                    CellData.ofMarkdownItem(ok)
+                  ),
+                  err => Result.mkError<CellDataError>(
+                    UnionCase.create("MarkdownItemParserError", err)
+                  ) as Result<CellData, CellDataError>
+                )
+              ),
+              Deferred.resolved
+            ))
+          })
+          .catch(err => {
+            UnionCase.create("FetchError", err)
+          })
+      })
+      .catch(err => {
+        Result.mkError<CellDataError>(
+          UnionCase.create("FetchError", err)
+        )
+      })
+  }
+
   export function create(
     updating: (itemIndex: number, updatedItem: DeferredCellStorageItem) => void,
   ): CellStorage {
@@ -166,39 +203,6 @@ export namespace CellStorage {
       )
     )
 
-    function load(url: string, index: number) {
-      fetch(url)
-        .then(response => {
-          response.text()
-            .then(rawMarkdown => {
-              updating(index, pipeInto(
-                rawMarkdown,
-                rawMarkdown => pipeInto(
-                  MarkdownItemParser.parse(rawMarkdown),
-                  result => Result.reduce(
-                    result,
-                    ok => Result.mkOk(
-                      CellData.ofMarkdownItem(ok)
-                    ),
-                    err => Result.mkError<CellDataError>(
-                      UnionCase.create("MarkdownItemParserError", err)
-                    ) as Result<CellData, CellDataError>
-                  )
-                ),
-                Deferred.resolved
-              ))
-            })
-            .catch(err => {
-              UnionCase.create("FetchError", err)
-            })
-        })
-        .catch(err => {
-          Result.mkError<CellDataError>(
-            UnionCase.create("FetchError", err)
-          )
-        })
-    }
-
     const all: CellStorage = pipeInto(
       [...predefinedItems2, ...toLoads],
       items => items.map((item, index) => {
@@ -207,7 +211,7 @@ export namespace CellStorage {
             return item.fields
           case "ToLoad":
             const url = item.fields
-            load(url, index)
+            loadItem(url, index, updating)
             return Deferred.hasNotStartedYet()
         }
       })
