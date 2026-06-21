@@ -71,7 +71,7 @@ export namespace MardownItemParser {
     const frontmatterResult = parseRawFrontmatter(fileContent)
     if (frontmatterResult[0] === "Error") {
       return Result.mkError(
-        UnionCase.mkUnionCase("FrontmatterError", frontmatterResult[1])
+        UnionCase.create("FrontmatterError", frontmatterResult[1])
       )
     }
     const frontmatter = frontmatterResult[1]
