@@ -6,8 +6,8 @@
   import NavBar from "./components/NavBar.svelte"
   import Table from "./components/Table.svelte"
   import Modal from "./components/Modal.svelte"
-  import Markdown from "./components/Markdown.svelte";
-  import type CellData from "./stores/cellData";
+  import Markdown from "./components/Markdown.svelte"
+  import type CellData from "./stores/cellData"
 
   let cells: CellStorage = CellStorage.create()
 
