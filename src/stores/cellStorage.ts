@@ -1,13 +1,15 @@
 import update from "immutability-helper"
+import { Deferred } from "@fering-org/functional-helper"
+
 import CellData from "./cellData"
 
 export type CellIndex = number
 
-export type CellStorage = CellData[]
+export type CellStorage = Deferred<CellData>[]
 
 export namespace CellStorage {
   export function create(): CellStorage {
-    const items: CellStorage = [
+    const items: CellData[] = [
       {
         title: "Аперо",
         imageSrc: "./items/apero.png",
@@ -138,13 +140,13 @@ export namespace CellStorage {
         description: "Япония, кимоно, сакура.",
       }
     ]
-    return items
+    return items.map(item => Deferred.resolved(item))
   }
 
   export function updateCell(
     cellStorage: CellStorage,
     cellIndex: CellIndex,
-    updateCell: (cell: CellData) => CellData,
+    updateCell: (cell: Deferred<CellData>) => Deferred<CellData>,
   ) : CellStorage {
     return update(cellStorage, {
       [cellIndex]: { $apply: (cell) => {

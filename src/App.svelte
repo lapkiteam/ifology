@@ -7,38 +7,44 @@
   import Table from "./components/Table.svelte"
   import Modal from "./components/Modal.svelte"
   import Markdown from "./components/Markdown.svelte";
+  import type CellData from "./stores/cellData";
 
   let cells: CellStorage = CellStorage.create()
 
   let modalState: Option<CellIndex> = Option.mkNone()
+  function modalStateReduce(
+    modalState: Option<CellIndex>,
+    mapping: (cellData: CellData) => string,
+  ) {
+    return Option.reduce(
+      modalState,
+      (modalState) => {
+        const cell = cells[modalState]
+        if (cell.case === "HasNotStartedYet") {
+          return "элемент не готов"
+        }
+        if (cell.case === "InProgress") {
+          return "элемент не прогрузился"
+        }
+        return mapping(cell.fields)
+      },
+      () => "Элемент не найден"
+    )
+  }
 
   $: modalOpened = Option.isSome(modalState)
 
-  $: modalTitle = (() => {
-    return Option.reduce(
-      modalState,
-      (modalState) => cells[modalState].title,
-      () => "Элемент не найден"
-    )
-  })()
+  $: modalTitle = modalStateReduce(modalState, cellData =>
+    cellData.title || ""
+  )
 
-  $: modalImage = (() => {
-    return Option.reduce(
-      modalState,
-      (modalState) =>
-        cells[modalState].imageSrc,
-      () => "Элемент не найден",
-    )
-  })()
+  $: modalImage = modalStateReduce(modalState, cellData =>
+    cellData.imageSrc || ""
+  )
 
-  $: modalDescription = (() => {
-    return Option.reduce(
-      modalState,
-      (modalState) =>
-        cells[modalState].description || "Описание отсутствует",
-      () => "Элемент не найден"
-    )
-  })()
+  $: modalDescription = modalStateReduce(modalState, cellData =>
+    cellData.description || "Описание отсутствует"
+  )
 
   function modalOpen(index: CellIndex) {
     modalState = Option.mkSome(index)
