@@ -204,7 +204,10 @@ export namespace CellStorage {
     )
 
     const all: CellStorage = pipeInto(
-      [...predefinedItems2, ...toLoads],
+      [
+        ...predefinedItems2,
+        ...toLoads,
+      ],
       items => items.map((item, index) => {
         switch (item.case) {
           case "Loaded":
@@ -212,7 +215,7 @@ export namespace CellStorage {
           case "ToLoad":
             const url = item.fields
             loadItem(url, index, updating)
-            return Deferred.hasNotStartedYet()
+            return Deferred.inProgress()
         }
       })
     )
