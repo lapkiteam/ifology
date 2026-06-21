@@ -3,7 +3,7 @@
 
   import { concat } from "../lib/utils"
   import { type CellStorage } from "../stores/cellStorage"
-  import Cell from "./Cell.svelte"
+  import ResultCellStorageItem from "./ResultCellStorageItem.svelte"
 
   export let cells: CellStorage
   export let onClick: Option<(cellIndex: number) => void> = undefined
@@ -21,9 +21,8 @@
 ])}>
   {#each cells as cell, cellIndex}
     {#if cell.case === "Resolved"}
-      <Cell
-        description={cell.fields.title || ""}
-        imageSrc={cell.fields.imageSrc}
+      <ResultCellStorageItem
+        item={cell.fields}
         onClick={() => {
           if (onClick) {
             onClick(cellIndex)

@@ -26,7 +26,11 @@
         if (cell.case === "InProgress") {
           return "элемент не прогрузился"
         }
-        return mapping(cell.fields)
+        const result = cell.fields
+        if (result[0] === "Error") {
+          return `Ошибка: ${result[1]}`
+        }
+        return mapping(result[1])
       },
       () => "Элемент не найден"
     )
