@@ -25,7 +25,7 @@ export type MardownItem = {
 export type MarkdownItemParserError =
   | UnionCase<"FrontmatterError", P.Failure>
 
-export namespace MardownItemParser {
+export namespace MarkdownItemParser {
   const parserRawFrontmatter = (() => {
     const separator = "---"
     const psep = P.string(separator)

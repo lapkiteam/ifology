@@ -1,11 +1,11 @@
 import { Result } from "@fering-org/functional-helper"
 import { describe, expect, it } from "vitest"
 
-import { MardownItemParser } from "../../src/stores/markdownItem"
+import { MarkdownItemParser } from "../../src/stores/markdownItem"
 
-describe("MardownItemParser.parseRawFrontmatter", () => {
+describe("MarkdownItemParser.parseRawFrontmatter", () => {
   it("empty", () => {
-    expect(MardownItemParser.parseRawFrontmatter(
+    expect(MarkdownItemParser.parseRawFrontmatter(
       [
         "---",
         "---",
@@ -17,7 +17,7 @@ describe("MardownItemParser.parseRawFrontmatter", () => {
   })
 
   it("base", () => {
-    expect(MardownItemParser.parseRawFrontmatter(
+    expect(MarkdownItemParser.parseRawFrontmatter(
       [
         "---",
         "authors:",
@@ -38,7 +38,7 @@ describe("MardownItemParser.parseRawFrontmatter", () => {
   })
 
   it("blank newlines", () => {
-    expect(MardownItemParser.parseRawFrontmatter(
+    expect(MarkdownItemParser.parseRawFrontmatter(
       [
         "---",
         "authors:",
@@ -59,7 +59,7 @@ describe("MardownItemParser.parseRawFrontmatter", () => {
   })
 
   it("eof", () => {
-    expect(MardownItemParser.parseRawFrontmatter(
+    expect(MarkdownItemParser.parseRawFrontmatter(
       [
         "---",
         "---",
@@ -72,9 +72,9 @@ describe("MardownItemParser.parseRawFrontmatter", () => {
   })
 })
 
-describe("MardownItemParser.parse", () => {
+describe("MarkdownItemParser.parse", () => {
   it("empty", () => {
-    expect(MardownItemParser.parse(
+    expect(MarkdownItemParser.parse(
       [
         "---",
         "authors:",
