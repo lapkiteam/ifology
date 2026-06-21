@@ -9,7 +9,9 @@
   import Markdown from "./components/Markdown.svelte"
   import type CellData from "./stores/cellData"
 
-  let cells: CellStorage = CellStorage.create()
+  let cells: CellStorage = CellStorage.create((index, updatedItem) => {
+    cells = CellStorage.updateCell(cells, index, _ => updatedItem)
+  })
 
   let modalState: Option<CellIndex> = Option.mkNone()
   function modalStateReduce(

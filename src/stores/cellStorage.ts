@@ -1,11 +1,15 @@
 import update from "immutability-helper"
-import { Deferred, Result } from "@fering-org/functional-helper"
+import { Deferred, UnionCase, Result } from "@fering-org/functional-helper"
+import { pipeInto } from "ts-functional-pipe"
 
 import CellData from "./cellData"
+import { MarkdownItemParser, type MarkdownItemParserError } from "./markdownItem"
 
 export type CellIndex = number
 
-export type CellDataError = string
+export type CellDataError =
+  | UnionCase<"FetchError", any>
+  | UnionCase<"MarkdownItemParserError", MarkdownItemParserError>
 
 export type ResultCellStorageItem = Result<CellData, CellDataError>
 
@@ -14,17 +18,10 @@ export type DeferredCellStorageItem = Deferred<ResultCellStorageItem>
 export type CellStorage = DeferredCellStorageItem[]
 
 export namespace CellStorage {
-  export function create(): CellStorage {
-    const items: CellData[] = [
-      {
-        title: "Аперо",
-        imageSrc: "./items/apero.png",
-        description: [
-          "[Агент007](https://ifwiki.ru/Агент007) — создатель [Аперо](https://ifwiki.ru/Аперо). Не путать с Агент Лапки.",
-          "",
-          "Аперо (аперитив) — это вечерний ритуал расслабления и общения за легкими напитками и закусками перед ужином.",
-        ].join("\n"),
-      },
+  export function create(
+    updating: (itemIndex: number, updatedItem: DeferredCellStorageItem) => void,
+  ): CellStorage {
+    const predefinedItems: CellData[] = [
       {
         title: "Гильдия авторов",
         imageSrc: "./items/authors-guild.png",
@@ -146,9 +143,77 @@ export namespace CellStorage {
         description: "Япония, кимоно, сакура.",
       }
     ]
-    return items.map(item =>
-      Deferred.resolved(Result.mkOk(item))
+
+    type Elem =
+      | UnionCase<"Loaded", DeferredCellStorageItem>
+      | UnionCase<"ToLoad", string>
+
+    const predefinedItems2: Elem[] =
+      predefinedItems.map(item => pipeInto(
+          item,
+          Result.mkOk,
+          Deferred.resolved,
+          x => UnionCase.create("Loaded", x)
+        )
+      )
+
+    const toLoads: Elem[] = pipeInto(
+      [
+        "items/apero.md"
+      ],
+      xs => xs.map(url =>
+        UnionCase.create("ToLoad", url)
+      )
     )
+
+    function load(url: string, index: number) {
+      fetch(url)
+        .then(response => {
+          response.text()
+            .then(rawMarkdown => {
+              updating(index, pipeInto(
+                rawMarkdown,
+                rawMarkdown => pipeInto(
+                  MarkdownItemParser.parse(rawMarkdown),
+                  result => Result.reduce(
+                    result,
+                    ok => Result.mkOk(
+                      CellData.ofMarkdownItem(ok)
+                    ),
+                    err => Result.mkError<CellDataError>(
+                      UnionCase.create("MarkdownItemParserError", err)
+                    ) as Result<CellData, CellDataError>
+                  )
+                ),
+                Deferred.resolved
+              ))
+            })
+            .catch(err => {
+              UnionCase.create("FetchError", err)
+            })
+        })
+        .catch(err => {
+          Result.mkError<CellDataError>(
+            UnionCase.create("FetchError", err)
+          )
+        })
+    }
+
+    const all: CellStorage = pipeInto(
+      [...predefinedItems2, ...toLoads],
+      items => items.map((item, index) => {
+        switch (item.case) {
+          case "Loaded":
+            return item.fields
+          case "ToLoad":
+            const url = item.fields
+            load(url, index)
+            return Deferred.hasNotStartedYet()
+        }
+      })
+    )
+
+    return all
   }
 
   export function updateCell(
