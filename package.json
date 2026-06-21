@@ -31,6 +31,7 @@
     "immutability-helper": "^3.1.1",
     "js-yaml": "^4.2.0",
     "marked": "^18.0.5",
-    "parsimmon": "^1.18.1"
+    "parsimmon": "^1.18.1",
+    "ts-functional-pipe": "^3.1.2"
   }
 }
