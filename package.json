@@ -13,6 +13,8 @@
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^3.0.2",
     "@tsconfig/svelte": "^5.0.2",
+    "@types/js-yaml": "^4.0.9",
+    "@types/parsimmon": "^1.10.9",
     "postcss": "~8.4.38",
     "rollup": "~4.14.1",
     "svelte": "^4.2.19",
@@ -27,6 +29,9 @@
     "@fering-org/functional-helper": "^0.7.0",
     "dompurify": "^3.4.9",
     "immutability-helper": "^3.1.1",
-    "marked": "^18.0.5"
+    "js-yaml": "^4.2.0",
+    "marked": "^18.0.5",
+    "parsimmon": "^1.18.1",
+    "ts-functional-pipe": "^3.1.2"
   }
 }

@@ -1,22 +1,64 @@
 import update from "immutability-helper"
+import { Deferred, UnionCase, Result } from "@fering-org/functional-helper"
+import { pipeInto } from "ts-functional-pipe"
+
 import CellData from "./cellData"
+import { MarkdownItemParser, type MarkdownItemParserError } from "./markdownItem"
 
 export type CellIndex = number
 
-export type CellStorage = CellData[]
+export type CellDataError =
+  | UnionCase<"FetchError", any>
+  | UnionCase<"MarkdownItemParserError", MarkdownItemParserError>
+
+export type ResultCellStorageItem = Result<CellData, CellDataError>
+
+export type DeferredCellStorageItem = Deferred<ResultCellStorageItem>
+
+export type CellStorage = DeferredCellStorageItem[]
 
 export namespace CellStorage {
-  export function create(): CellStorage {
-    const items: CellStorage = [
-      {
-        title: "Аперо",
-        imageSrc: "./items/apero.png",
-        description: [
-          "[Агент007](https://ifwiki.ru/Агент007) — создатель [Аперо](https://ifwiki.ru/Аперо). Не путать с Агент Лапки.",
-          "",
-          "Аперо (аперитив) — это вечерний ритуал расслабления и общения за легкими напитками и закусками перед ужином.",
-        ].join("\n"),
-      },
+  function loadItem(
+    url: string,
+    index: number,
+    updating: (itemIndex: number, updatedItem: DeferredCellStorageItem) => void,
+  ) {
+    fetch(url)
+      .then(response => {
+        response.text()
+          .then(rawMarkdown => {
+            updating(index, pipeInto(
+              rawMarkdown,
+              rawMarkdown => pipeInto(
+                MarkdownItemParser.parse(rawMarkdown),
+                result => Result.reduce(
+                  result,
+                  ok => Result.mkOk(
+                    CellData.ofMarkdownItem(ok)
+                  ),
+                  err => Result.mkError<CellDataError>(
+                    UnionCase.create("MarkdownItemParserError", err)
+                  ) as Result<CellData, CellDataError>
+                )
+              ),
+              Deferred.resolved
+            ))
+          })
+          .catch(err => {
+            UnionCase.create("FetchError", err)
+          })
+      })
+      .catch(err => {
+        Result.mkError<CellDataError>(
+          UnionCase.create("FetchError", err)
+        )
+      })
+  }
+
+  export function create(
+    updating: (itemIndex: number, updatedItem: DeferredCellStorageItem) => void,
+  ): CellStorage {
+    const predefinedItems: CellData[] = [
       {
         title: "Гильдия авторов",
         imageSrc: "./items/authors-guild.png",
@@ -79,17 +121,6 @@ export namespace CellStorage {
         ].join("\n"),
       },
       {
-        title: "QSP",
-        imageSrc: "./items/qsp.png",
-        description: [
-          "> Doom на QSP пока не писали?",
-          ">",
-          "> — Первый вопрос новичка в исполнении [Эдуарда из ИФ чат (чистилище)](https://t.me/ifiction_group/141292)",
-          "",
-          "Каждый автор пытается сделать [Куспом](https://ifwiki.ru/QSP) то, для чего он не предназначен.",
-        ].join("\n")
-      },
-      {
         title: "Квестбук",
         imageSrc: "./items/questbook.png",
         description: [
@@ -138,13 +169,54 @@ export namespace CellStorage {
         description: "Япония, кимоно, сакура.",
       }
     ]
-    return items
+
+    type Elem =
+      | UnionCase<"Loaded", DeferredCellStorageItem>
+      | UnionCase<"ToLoad", string>
+
+    const predefinedItems2: Elem[] =
+      predefinedItems.map(item => pipeInto(
+          item,
+          Result.mkOk,
+          Deferred.resolved,
+          x => UnionCase.create("Loaded", x)
+        )
+      )
+
+    const toLoads: Elem[] = pipeInto(
+      [
+        "apero.md",
+        "qsp.md",
+      ],
+      xs => xs.map(fileName =>
+        UnionCase.create("ToLoad", `items/${fileName}`)
+      )
+    )
+
+    const all: CellStorage = pipeInto(
+      [
+        ...predefinedItems2,
+        ...toLoads,
+      ],
+      items => items.map((item, index) => {
+        switch (item.case) {
+          case "Loaded":
+            return item.fields
+          case "ToLoad":
+            const url = item.fields
+            loadItem(url, index, updating)
+            return Deferred.inProgress()
+        }
+      })
+    )
+
+    return all
   }
 
   export function updateCell(
     cellStorage: CellStorage,
     cellIndex: CellIndex,
-    updateCell: (cell: CellData) => CellData,
+    updateCell: (cell: DeferredCellStorageItem) => DeferredCellStorageItem,
   ) : CellStorage {
     return update(cellStorage, {
       [cellIndex]: { $apply: (cell) => {
