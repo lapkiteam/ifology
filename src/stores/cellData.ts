@@ -1,7 +1,7 @@
 import update from "immutability-helper"
 import { Option } from "@fering-org/functional-helper"
 
-import { type MardownItem } from "./markdownItem"
+import { type MarkdownItem } from "./markdownItem"
 import { pipeInto } from "ts-functional-pipe"
 
 export type CellData = {
@@ -40,7 +40,7 @@ export namespace CellData {
     })
   }
 
-  export function ofMarkdownItem(markdownItem: MardownItem): CellData {
+  export function ofMarkdownItem(markdownItem: MarkdownItem): CellData {
     return pipeInto(
       CellData.create(),
       cellData => {

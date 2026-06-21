@@ -17,7 +17,7 @@ export namespace FrontmatterParser {
   }
 }
 
-export type MardownItem = {
+export type MarkdownItem = {
   Frontmatter: FrontmatterParserResult
   Content: string
 }
@@ -67,7 +67,7 @@ export namespace MarkdownItemParser {
 
   export function parse(
     fileContent: string
-  ): Result<MardownItem, MarkdownItemParserError> {
+  ): Result<MarkdownItem, MarkdownItemParserError> {
     const frontmatterResult = parseRawFrontmatter(fileContent)
     if (frontmatterResult[0] === "Error") {
       return Result.mkError(
