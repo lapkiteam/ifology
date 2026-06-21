@@ -8,12 +8,14 @@
     "build": "vite build",
     "preview": "vite preview",
     "check": "svelte-check --tsconfig ./tsconfig.json",
-    "test": "vitest"
+    "test": "vitest",
+    "convert": "tsc -p tsconfig.node.json --outDir dist && node dist/scripts/convertToMarkdown.js"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^3.0.2",
     "@tsconfig/svelte": "^5.0.2",
     "@types/js-yaml": "^4.0.9",
+    "@types/node": "^18.19.130",
     "@types/parsimmon": "^1.10.9",
     "postcss": "~8.4.38",
     "rollup": "~4.14.1",
@@ -32,6 +34,7 @@
     "js-yaml": "^4.2.0",
     "marked": "^18.0.5",
     "parsimmon": "^1.18.1",
+    "sanitize-filename": "^1.6.4",
     "ts-functional-pipe": "^3.1.2"
   }
 }
