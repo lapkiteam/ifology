@@ -7,8 +7,12 @@
 </script>
 
 {#if item[0] === "Error"}
-  <h1>Error</h1>
-  <pre>{item[1]}</pre>
+  <div>
+    <h1>Error</h1>
+    <pre class={concat([
+      "text-red-300"
+    ])}>{JSON.stringify(item[1], undefined, 2)}</pre>
+  </div>
 {:else}
   <slot ok={item[1]} />
 {/if}
