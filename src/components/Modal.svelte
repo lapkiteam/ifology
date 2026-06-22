@@ -34,9 +34,19 @@
     />
 
     <!-- Modal panel -->
-    <div
-      class="relative bg-white dark:bg-gray-800 rounded-lg shadow-lg max-w-lg w-full mx-4 p-6 z-10 outline-none"
-    >
+    <div class={concat([
+      "relative",
+      "bg-white",
+      "dark:bg-gray-800",
+      "rounded-lg",
+      "shadow-lg",
+      "max-w-lg",
+      "w-full",
+      "mx-4",
+      "p-6",
+      "z-10",
+      "outline-none",
+    ])}>
       <div class="flex items-start justify-between space-x-4">
         <h2 id="modal-title" class="text-lg font-semibold text-gray-800 dark:text-gray-100">{title}</h2>
         <button
