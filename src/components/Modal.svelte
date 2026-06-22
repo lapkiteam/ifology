@@ -47,6 +47,8 @@
       "p-6",
       "z-10",
       "outline-none",
+      "flex",
+      "flex-col",
     ])}>
       <div class="flex items-start justify-between space-x-4">
         <h2 id="modal-title" class="text-lg font-semibold text-gray-800 dark:text-gray-100">{title}</h2>
@@ -67,6 +69,7 @@
         "text-sm",
         "text-gray-600",
         "dark:text-gray-300",
+        "overflow-y-auto",
       ])}>
         <slot />
       </div>
