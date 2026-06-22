@@ -1,5 +1,8 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte"
+
+  import { concat } from "../lib/utils"
+
   export let open = false
   export let title = ""
   const dispatch = createEventDispatcher()
@@ -11,7 +14,14 @@
 
 {#if open}
   <div
-    class="fixed inset-0 z-50 flex items-center justify-center"
+    class={concat([
+      "fixed",
+      "inset-0",
+      "z-50",
+      "flex",
+      "items-center",
+      "justify-center",
+    ])}
     aria-modal="true"
     role="dialog"
     aria-labelledby="modal-title"
