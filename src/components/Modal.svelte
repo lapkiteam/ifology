@@ -42,6 +42,7 @@
       "shadow-lg",
       "max-w-lg",
       "w-full",
+      "max-h-[calc(var(--vh,_1vh)_*_100)]",
       "mx-4",
       "p-6",
       "z-10",
