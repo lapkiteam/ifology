@@ -1,6 +1,7 @@
 import P from "parsimmon"
 import { Result, UnionCase } from "@fering-org/functional-helper"
 import yaml, { YAMLException } from "js-yaml"
+import { pipeInto } from "ts-functional-pipe"
 
 export type FrontmatterParserResult =
   Result<Record<string, unknown>, YAMLException>
@@ -80,5 +81,27 @@ export namespace MarkdownItemParser {
         frontmatter.value.join("\n")),
       Content: frontmatter.rest,
     })
+  }
+}
+
+export namespace MarkdownItemPrinter {
+  export function print(markdown: MarkdownItem) {
+    function printFrontmatter(frontmatter: FrontmatterParserResult) {
+      if (frontmatter[0] === "Error") {
+        return ""
+      }
+      return pipeInto(
+        yaml.dump(frontmatter[1]),
+        yml => [
+          "---",
+          yml.trimEnd(),
+          "---",
+        ].join("\n")
+      )
+    }
+    return [
+      printFrontmatter(markdown.Frontmatter),
+      markdown.Content,
+    ].join("\n")
   }
 }
