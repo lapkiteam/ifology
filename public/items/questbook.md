@@ -12,4 +12,22 @@ title: Квестбук
 
 Все процессы завязаны на знаменитом [синеликом админе](https://quest-book.ru/forum/user/2), который одновременно владелец, менеджер, модератор, спонсор, организатор мероприятий и оформитель.
 
-Сайт регулярно атакуется студентами из Тюмени, использующих его для практических работ по информатике.
+Сайт регулярно атакуется студентами из Тюмени, использующих его для практических работ по информатике. Примеры работ:
+
+* [Легенды Севера : интерактивное путешествие по культуре коренных народов Тюменского Севера](https://quest-book.ru/online/view/game19364)
+* [Улицы Памяти: Тюмень.](https://quest-book.ru/online/view/game19229)
+* [Учеба в ТюмГУ](https://quest-book.ru/online/view/game19036) — прошло модерацию
+* [Тюмень: Загадки Старого Города](https://quest-book.ru/online/mitril/publication/test/17913/1fce80c738135d53f9929105de693353/)
+* [По улицам истории : героическая летопись Тюмени](https://quest-book.ru/online/mitril/publication/test/19353/d7bae89668b839a5ac6207f30d0a8c92/)
+* [культурные памятники Тюмени](https://quest-book.ru/online/mitril/publication/test/19246/9dce2ac108e588608a77293f5051d14d/)
+* [Выживание в условиях пандемии коронавируса в Тюмени](https://quest-book.ru/online/mitril/publication/test/12348/1a151c781ab34d9471a8fffa49745891/)
+* [Как выжить в время коронавируса в Тюмени?](https://quest-book.ru/online/coronavirus/)
+* [Выживание во время коронавирусной эпидемии в Тюмени](https://quest-book.ru/online/view/game9466/)
+* [Современная Тюмень](https://quest-book.ru/online/mitril/publication/test/19140/d4b8e05a49921e3d9b577f156d7f7ae1/)
+* [Зелёные зоны Тюмени](https://quest-book.ru/online/mitril/publication/test/10489/f9c7b98770ab33474e638a61837ddf39/)
+* [Где найти развлечения в городе Тюмень](https://quest-book.ru/online/game7534/)
+* [Торговля в Тюмени 60- 80 годы](https://quest-book.ru/online/game7540/)
+* [Выживание вовремя коронавирусной эпидемии в Тюмени](https://quest-book.ru/online/game8274/)
+* [выживший 2020](https://quest-book.ru/online/view/game10396)
+
+И это — игры только с открытым доступом, 99% — в скрытой части айсберга, что отклонено и висит в проектах авторов.
