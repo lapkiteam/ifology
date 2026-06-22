@@ -62,7 +62,12 @@
         </button>
       </div>
 
-      <div class="mt-2 text-sm text-gray-600 dark:text-gray-300">
+      <div class={concat([
+        "mt-2",
+        "text-sm",
+        "text-gray-600",
+        "dark:text-gray-300",
+      ])}>
         <slot />
       </div>
 
