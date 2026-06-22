@@ -2,9 +2,13 @@
   "compilerOptions": {
     "composite": true,
     "skipLibCheck": true,
-    "module": "ESNext",
-    "moduleResolution": "bundler",
+    "allowSyntheticDefaultImports": true,
+    "target": "es2022",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
     "strict": true
   },
-  "include": ["vite.config.js"]
+  "include": ["src/**/*.ts", "scripts/**/*.ts", "vite.config.js"]
 }
