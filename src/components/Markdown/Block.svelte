@@ -5,6 +5,7 @@
   import Paragraph from "./Paragraph.svelte"
   import List from "./List.svelte"
   import Blockquote from "./Blockquote.svelte"
+  import Html from "./inlines/Html.svelte"
 
   export let token: Token
   export let last: boolean
@@ -20,6 +21,8 @@
   <!-- empty -->
 {:else if token.type === "blockquote"}
   <Blockquote token={token} />
+{:else if token.type === "html"}
+  <Html token={token} />
 {:else}
   <pre>{JSON.stringify(token, undefined, 2)}</pre>
 {/if}
