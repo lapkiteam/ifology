@@ -4,6 +4,7 @@
   import Heading from "./Heading.svelte"
   import Paragraph from "./Paragraph.svelte"
   import List from "./List.svelte"
+  import Blockquote from "./Blockquote.svelte"
 
   export let token: Token
 </script>
@@ -17,6 +18,8 @@
     <List token={token} />
   {:else if token.type === "space"}
     <!-- empty -->
+  {:else if token.type === "blockquote"}
+    <Blockquote token={token} />
   {:else}
     <pre>{JSON.stringify(token, undefined, 2)}</pre>
   {/if}
