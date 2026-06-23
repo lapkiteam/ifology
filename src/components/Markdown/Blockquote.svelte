@@ -6,6 +6,8 @@
 
   export let token: Token
   const blockquote = token as Tokens.Blockquote
+  const isLast = (index: number) =>
+    index === blockquote.tokens.length - 1
 </script>
 
 <blockquote class={concat([
@@ -23,7 +25,7 @@
   "before:bg-gray-600",
   "before:dark:bg-gray-600",
 ])}>
-  {#each blockquote.tokens as item}
-    <Block token={item} />
+  {#each blockquote.tokens as item, index}
+    <Block token={item} last={isLast(index)} />
   {/each}
 </blockquote>

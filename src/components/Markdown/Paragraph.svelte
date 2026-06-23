@@ -5,11 +5,12 @@
   import Inlines from "./Inlines.svelte"
 
   export let token: Token
+  export let last
   let paragraph = token as Tokens.Paragraph
 </script>
 
 <p class={concat([
-  "mb-2"
+  last ? "" : "mb-2"
 ])}>
   <Inlines tokens={paragraph.tokens} />
 </p>

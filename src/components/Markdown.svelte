@@ -13,12 +13,18 @@
       marked.lexer(content, { async: false })
     )
   }
+  const isLast = (index: number) =>
+    Option.reduce(
+      html,
+      html => index === html.length - 1,
+      () => false,
+    )
 </script>
 
 <div>
   {#if html}
-    {#each html as token}
-      <Block token={token} />
+    {#each html as token, index}
+      <Block token={token} last={isLast(index)} />
     {/each}
   {/if}
 </div>
