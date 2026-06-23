@@ -7,12 +7,13 @@
   import Blockquote from "./Blockquote.svelte"
 
   export let token: Token
+  export let last: boolean
 </script>
 
 {#if token.type === "heading"}
   <Heading token={token} />
 {:else if token.type === "paragraph"}
-  <Paragraph token={token} />
+  <Paragraph token={token} last={last} />
 {:else if token.type === "list"}
   <List token={token} />
 {:else if token.type === "space"}
