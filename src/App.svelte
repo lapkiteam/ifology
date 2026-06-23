@@ -114,7 +114,7 @@
         </div>
 
         <div class="mt-2">
-          <Markdown allowHtml content={modalDescription} />
+          <Markdown content={modalDescription} />
         </div>
 
         <button slot="secondary" class="px-3 py-1 rounded border" on:click={modalClose}>
