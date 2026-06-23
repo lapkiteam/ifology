@@ -1,55 +1,24 @@
 <script lang="ts">
-  import { marked, Renderer } from 'marked'
-  import DOMPurify from 'dompurify'
+  import { marked, type TokensList } from 'marked'
+  import { Option } from "@fering-org/functional-helper"
 
-  import { concat } from '../lib/utils'
+  import Block from "./Markdown/Block.svelte"
 
   export let content = ''
-  export let allowHtml = false
 
-  let html = ''
-
-  const renderer: Partial<Renderer> = {
-    link({ href, title, tokens }) {
-      const attributes = concat([
-        `href="${href}"`,
-        `class="${concat([
-          "text-blue-800",
-          "dark:text-blue-400",
-        ])}"`,
-        title ? ` title="${title}"` : "",
-        `target="_blank"`,
-        `rel="noopener noreferrer"`,
-      ])
-      const text = this.parser?.parseInline(tokens)
-      return `<a ${attributes}>${text}</a>`
-    }
-  }
-
-  marked.use({ renderer })
-
-  marked.setOptions({
-    breaks: false,
-  })
-
-  DOMPurify.setConfig({ ADD_ATTR: ['target'] })
-
-  DOMPurify.addHook('afterSanitizeAttributes', (node) => {
-    if (node.tagName === 'A' && node.getAttribute('target') === '_blank') {
-      if (!node.getAttribute('rel')) node.setAttribute('rel', 'noopener noreferrer')
-    }
-  })
+  let html: Option<TokensList> = undefined
 
   $: {
-    html = marked.parse(content, {}) as string
-    if (!allowHtml) {
-      html = DOMPurify.sanitize(html, { ALLOWED_TAGS: undefined })
-    } else {
-      html = DOMPurify.sanitize(html)
-    }
+    html = Option.mkSome(
+      marked.lexer(content, { async: false })
+    )
   }
 </script>
 
-<div class="markdown-render">
-  {@html html}
+<div>
+  {#if html}
+    {#each html as token}
+      <Block token={token} />
+    {/each}
+  {/if}
 </div>
