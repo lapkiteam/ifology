@@ -105,7 +105,7 @@
         ])}>
           <img
             class={concat([
-              "size-32",
+              "h-32",
               "object-contain",
             ])}
             src={modalImage}
