@@ -16,6 +16,7 @@
   ])}
   href={link.href}
   title={link.title}
+  target="_blank"
 >
   {#each link.tokens as token}
     <Inline token={token} />
