@@ -15,7 +15,7 @@
 {:else if token.type === "paragraph"}
   <Paragraph token={token} last={last} />
 {:else if token.type === "list"}
-  <List token={token} />
+  <List token={token} last={last} />
 {:else if token.type === "space"}
   <!-- empty -->
 {:else if token.type === "blockquote"}
