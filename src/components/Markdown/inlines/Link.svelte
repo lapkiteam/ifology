@@ -6,7 +6,6 @@
 
   export let token: Token
   let link = token as Tokens.Link
-
 </script>
 
 <a
