@@ -11,9 +11,14 @@
 </script>
 
 <!-- todo: make ordered list case -->
-<ul class={concat([
-  last ? "" : "mb-2"
-])}>
+<ul
+  role="list"
+  class={concat([
+    "pl-4",
+    "list-disc",
+    last ? "" : "mb-2",
+  ])}
+>
   {#each list.items as item}
     {#if item.type === "list_item"}
       <ListItem token={item} />
