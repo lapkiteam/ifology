@@ -2,7 +2,7 @@
   import { type Token, type Tokens } from "marked"
 
   import { concat } from "../../../lib/utils"
-  import Inlines from "../Inlines.svelte"
+  import Inlines from "./index.svelte"
 
   export let token: Token
   let link = token as Tokens.Link

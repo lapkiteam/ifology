@@ -1,7 +1,7 @@
 <script lang="ts">
   import { type Token } from "marked"
 
-  import Inline from "./Inline.svelte"
+  import Inline from "../Inline.svelte"
 
   export let tokens: Token[]
 </script>

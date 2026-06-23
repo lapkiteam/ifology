@@ -1,7 +1,7 @@
 <script lang="ts">
   import { type Token, type Tokens } from "marked"
 
-  import Inlines from "./Inlines.svelte"
+  import Inlines from "./inlines/index.svelte"
 
   export let token: Token
   let heading = token as Tokens.Heading
