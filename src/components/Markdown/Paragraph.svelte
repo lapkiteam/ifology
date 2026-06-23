@@ -1,14 +1,12 @@
 <script lang="ts">
   import { type Token, type Tokens } from "marked"
 
-  import Inline from "./Inline.svelte"
+  import Inlines from "./Inlines.svelte"
 
   export let token: Token
   let paragraph = token as Tokens.Paragraph
 </script>
 
 <p>
-  {#each paragraph.tokens as token}
-    <Inline token={token} />
-  {/each}
+  <Inlines tokens={paragraph.tokens} />
 </p>

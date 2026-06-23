@@ -2,7 +2,7 @@
   import { type Token, type Tokens } from "marked"
 
   import { concat } from "../../../lib/utils"
-  import Inline from "../Inline.svelte"
+  import Inlines from "../Inlines.svelte"
 
   export let token: Token
   let link = token as Tokens.Link
@@ -18,7 +18,5 @@
   title={link.title}
   target="_blank"
 >
-  {#each link.tokens as token}
-    <Inline token={token} />
-  {/each}
+  <Inlines tokens={link.tokens} />
 </a>

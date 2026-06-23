@@ -1,17 +1,14 @@
 <script lang="ts">
   import { type Token, type Tokens } from "marked"
 
-  import Inline from "../Inline.svelte"
+  import Inlines from "../Inlines.svelte"
 
   export let token: Token
   let text = token as Tokens.Text
-
 </script>
 
 {#if text.tokens}
-  {#each text.tokens as item}
-    <Inline token={item} />
-  {/each}
+  <Inlines tokens={text.tokens} />
 {:else}
   {text.text}
 {/if}
