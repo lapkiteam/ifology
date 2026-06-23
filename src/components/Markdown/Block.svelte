@@ -15,6 +15,8 @@
     <Paragraph token={token} />
   {:else if token.type === "list"}
     <List token={token} />
+  {:else if token.type === "space"}
+    <!-- empty -->
   {:else}
     <pre>{JSON.stringify(token, undefined, 2)}</pre>
   {/if}
