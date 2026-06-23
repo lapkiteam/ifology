@@ -9,18 +9,16 @@
   export let token: Token
 </script>
 
-<div>
-  {#if token.type === "heading"}
-    <Heading token={token} />
-  {:else if token.type === "paragraph"}
-    <Paragraph token={token} />
-  {:else if token.type === "list"}
-    <List token={token} />
-  {:else if token.type === "space"}
-    <!-- empty -->
-  {:else if token.type === "blockquote"}
-    <Blockquote token={token} />
-  {:else}
-    <pre>{JSON.stringify(token, undefined, 2)}</pre>
-  {/if}
-</div>
+{#if token.type === "heading"}
+  <Heading token={token} />
+{:else if token.type === "paragraph"}
+  <Paragraph token={token} />
+{:else if token.type === "list"}
+  <List token={token} />
+{:else if token.type === "space"}
+  <!-- empty -->
+{:else if token.type === "blockquote"}
+  <Blockquote token={token} />
+{:else}
+  <pre>{JSON.stringify(token, undefined, 2)}</pre>
+{/if}
