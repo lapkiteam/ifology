@@ -12,5 +12,5 @@
 {:else if token.type === "link"}
   <Link token={token} />
 {:else}
-  {JSON.stringify(token, undefined, 2)}
+  <pre>{JSON.stringify(token, undefined, 2)}</pre>
 {/if}
