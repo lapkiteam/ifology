@@ -2,15 +2,12 @@
   import { Option } from "@fering-org/functional-helper"
 
   import { concat } from "../lib/utils"
-  import CellStorage, { type CellIndex } from "../stores/cellStorage"
+  import { type CellIndex } from "../stores/cellStorage"
+  import cellsStore from "../stores/cellsStore"
   import Table from "../components/Table.svelte"
   import Modal from "../components/Modal.svelte"
   import Markdown from "../components/Markdown.svelte"
   import type CellData from "../stores/cellData"
-
-  let cells: CellStorage = CellStorage.create((index, updatedItem) => {
-    cells = CellStorage.updateCell(cells, index, _ => updatedItem)
-  })
 
   let modalState: Option<CellIndex> = Option.mkNone()
   function modalStateReduce(
@@ -20,7 +17,7 @@
     return Option.reduce(
       modalState,
       (modalState) => {
-        const cell = cells[modalState]
+        const cell = $cellsStore[modalState]
         if (cell.case === "HasNotStartedYet") {
           return "элемент не готов"
         }
@@ -70,7 +67,7 @@
   "overflow-y-auto",
 ])}>
   <Table
-    cells={cells}
+    cells={$cellsStore}
     onClick={cellIndex => {
       modalOpen(cellIndex)
     }}
