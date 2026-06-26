@@ -5,6 +5,8 @@ import { pipeInto } from "ts-functional-pipe"
 import CellData from "./cellData"
 import { MarkdownItemParser, type MarkdownItemParserError } from "./markdownItem"
 
+export type CellId = string
+
 export type CellIndex = number
 
 export type CellDataError =
@@ -19,10 +21,11 @@ export type DeferredCellStorageItem = Deferred<ResultCellStorageItem>
 export type CellStorage = DeferredCellStorageItem[]
 
 export namespace CellStorage {
-  function loadItem(
-    url: string,
+  export function loadItem(
+    id: CellId,
     callback: (item: ResultCellStorageItem) => void,
   ) {
+    const url = `items/${id}.md`
     fetch(url)
       .then(response => {
         if (!response.ok) {
@@ -110,7 +113,7 @@ export namespace CellStorage {
         "vn",
       ],
       xs => xs.map(fileName =>
-        UnionCase.create("ToLoad", `items/${fileName}.md`)
+        UnionCase.create("ToLoad", fileName)
       )
     )
 
