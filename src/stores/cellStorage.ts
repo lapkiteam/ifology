@@ -20,14 +20,13 @@ export type CellStorage = DeferredCellStorageItem[]
 export namespace CellStorage {
   function loadItem(
     url: string,
-    index: number,
-    updating: (itemIndex: number, updatedItem: DeferredCellStorageItem) => void,
+    updating: (updatedItem: DeferredCellStorageItem) => void,
   ) {
     fetch(url)
       .then(response => {
         response.text()
           .then(rawMarkdown => {
-            updating(index, pipeInto(
+            updating(pipeInto(
               rawMarkdown,
               rawMarkdown => pipeInto(
                 MarkdownItemParser.parse(rawMarkdown),
@@ -113,7 +112,9 @@ export namespace CellStorage {
             return item.fields
           case "ToLoad":
             const url = item.fields
-            loadItem(url, index, updating)
+            loadItem(url, updatedItem =>
+              updating(index, updatedItem)
+            )
             return Deferred.inProgress()
         }
       })
