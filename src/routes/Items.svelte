@@ -5,9 +5,13 @@
   import CellStorage, { type DeferredCellStorageItem, type CellId, type ResultCellStorageItem } from "../stores/cellStorage"
   import Markdown from "../components/Markdown.svelte"
   import DeferredView from "../components/Deferred.svelte"
-  import type CellData from "../stores/cellData";
+  import type CellData from "../stores/cellData"
 
-  export let id: CellId
+  export let params: {
+    id: CellId
+  }
+
+  export let id: CellId = params.id
 
   let item: DeferredCellStorageItem = Deferred.inProgress()
 
