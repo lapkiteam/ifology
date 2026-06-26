@@ -44,13 +44,21 @@ export namespace CellStorage {
             ))
           })
           .catch(err => {
-            UnionCase.create("FetchError", err)
+            callback(pipeInto(
+              Result.mkError<CellDataError>(
+                UnionCase.create("FetchError", err)
+              ) as Result<CellData, CellDataError>,
+              Deferred.resolved,
+            ))
           })
-      })
-      .catch(err => {
-        Result.mkError<CellDataError>(
-          UnionCase.create("FetchError", err)
-        )
+        })
+        .catch(err => {
+          callback(pipeInto(
+            Result.mkError<CellDataError>(
+              UnionCase.create("FetchError", err)
+            ) as Result<CellData, CellDataError>,
+            Deferred.resolved,
+          ))
       })
   }
 
