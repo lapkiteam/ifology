@@ -20,45 +20,39 @@ export type CellStorage = DeferredCellStorageItem[]
 export namespace CellStorage {
   function loadItem(
     url: string,
-    callback: (item: DeferredCellStorageItem) => void,
+    callback: (item: ResultCellStorageItem) => void,
   ) {
     fetch(url)
       .then(response => {
         response.text()
           .then(rawMarkdown => {
             callback(pipeInto(
-              rawMarkdown,
-              rawMarkdown => pipeInto(
-                MarkdownItemParser.parse(rawMarkdown),
-                result => Result.reduce(
-                  result,
-                  ok => Result.mkOk(
-                    CellData.ofMarkdownItem(ok)
-                  ),
-                  err => Result.mkError<CellDataError>(
-                    UnionCase.create("MarkdownItemParserError", err)
-                  ) as Result<CellData, CellDataError>
-                )
-              ),
-              Deferred.resolved
+              MarkdownItemParser.parse(rawMarkdown),
+              result => Result.reduce(
+                result,
+                ok => Result.mkOk(
+                  CellData.ofMarkdownItem(ok)
+                ),
+                err => Result.mkError<CellDataError>(
+                  UnionCase.create("MarkdownItemParserError", err)
+                ) as Result<CellData, CellDataError>
+              )
             ))
           })
           .catch(err => {
-            callback(pipeInto(
+            callback(
               Result.mkError<CellDataError>(
                 UnionCase.create("FetchError", err)
               ) as Result<CellData, CellDataError>,
-              Deferred.resolved,
-            ))
+            )
           })
         })
         .catch(err => {
-          callback(pipeInto(
+          callback(
             Result.mkError<CellDataError>(
               UnionCase.create("FetchError", err)
             ) as Result<CellData, CellDataError>,
-            Deferred.resolved,
-          ))
+          )
       })
   }
 
@@ -121,7 +115,9 @@ export namespace CellStorage {
           case "ToLoad":
             const url = item.fields
             loadItem(url, updatedItem =>
-              updating(index, updatedItem)
+              updating(index, Deferred.resolved(
+                updatedItem
+              ))
             )
             return Deferred.inProgress()
         }
