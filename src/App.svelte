@@ -1,6 +1,6 @@
 <script lang="ts">
   import { concat } from "./lib/utils"
-  import Home from "./routes/Home.svelte"
+  import Routes from "./routes/Index.svelte"
   import NavBar from "./components/NavBar.svelte"
 </script>
 
@@ -21,7 +21,7 @@
       "flex-col",
     ])}>
       <NavBar />
-      <Home />
+      <Routes />
     </div>
   </div>
 </main>
