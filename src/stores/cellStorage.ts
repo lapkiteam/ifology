@@ -20,13 +20,13 @@ export type CellStorage = DeferredCellStorageItem[]
 export namespace CellStorage {
   function loadItem(
     url: string,
-    updating: (updatedItem: DeferredCellStorageItem) => void,
+    callback: (item: DeferredCellStorageItem) => void,
   ) {
     fetch(url)
       .then(response => {
         response.text()
           .then(rawMarkdown => {
-            updating(pipeInto(
+            callback(pipeInto(
               rawMarkdown,
               rawMarkdown => pipeInto(
                 MarkdownItemParser.parse(rawMarkdown),
