@@ -9,6 +9,7 @@ export type CellIndex = number
 
 export type CellDataError =
   | UnionCase<"FetchError", any>
+  | UnionCase<"FetchNotFound", { statusCode: number }>
   | UnionCase<"MarkdownItemParserError", MarkdownItemParserError>
 
 export type ResultCellStorageItem = Result<CellData, CellDataError>
@@ -24,6 +25,16 @@ export namespace CellStorage {
   ) {
     fetch(url)
       .then(response => {
+        if (!response.ok) {
+          callback(Result.mkError<CellDataError>(
+            UnionCase.create(
+              "FetchNotFound", {
+                statusCode: response.status,
+              }
+            )
+          ))
+          return
+        }
         response.text()
           .then(rawMarkdown => {
             callback(pipeInto(
