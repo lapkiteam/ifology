@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { link } from "svelte-spa-router"
+
   import { concat } from "../lib/utils"
 </script>
 
@@ -21,13 +23,15 @@
       "gap-[10px]",
     ])}
   >
-    <div
+    <a
       class={concat([
         "text-xl",
       ])}
+      href="/"
+      use:link
     >
       ИФология
-    </div>
+    </a>
   </div>
   <div
     id="right"
