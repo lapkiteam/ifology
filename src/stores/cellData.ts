@@ -5,6 +5,7 @@ import { type MarkdownItem } from "./markdownItem"
 import { pipeInto } from "ts-functional-pipe"
 
 export type CellData = {
+  id: Option<string>
   title: Option<string>
   imageSrc: Option<string>
   description: Option<string>
@@ -13,6 +14,7 @@ export type CellData = {
 export namespace CellData {
   export function create(): CellData {
     return {
+      id: Option.mkNone(),
       title: Option.mkNone(),
       imageSrc: Option.mkNone(),
       description: Option.mkNone(),
@@ -49,6 +51,9 @@ export namespace CellData {
         }
         const frontmatter = markdownItem.Frontmatter[1]
         return update(cellData, {
+          id: {
+            $set: OptionExt.ofUnknown<string>(frontmatter.id)
+          },
           title: {
             $set: OptionExt.ofUnknown<string>(frontmatter.title)
           },
