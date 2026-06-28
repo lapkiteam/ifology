@@ -1,5 +1,6 @@
 <script lang="ts">
   import { Option } from "@fering-org/functional-helper"
+  import { push } from "svelte-spa-router"
 
   import { concat } from "../lib/utils"
   import { type CellIndex } from "../stores/cellStorage"
@@ -35,6 +36,10 @@
   }
 
   $: modalOpened = Option.isSome(modalState)
+
+  $: id = modalStateReduce(modalState, cellData =>
+    cellData.id || ""
+  )
 
   $: modalTitle = modalStateReduce(modalState, cellData =>
     cellData.title || ""
@@ -77,6 +82,9 @@
   bind:open={modalOpened}
   bind:title={modalTitle}
   on:close={modalClose}
+  shareOnClick={() => {
+    push(`/items/${id}`)
+  }}
 >
   <div class={concat([
     "flex",

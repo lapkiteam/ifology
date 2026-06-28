@@ -5,6 +5,7 @@
 
   export let open = false
   export let title = ""
+  export let shareOnClick: () => void
   const dispatch = createEventDispatcher()
 
   function close() {
@@ -54,16 +55,44 @@
       ])}>
         <div class="flex items-start justify-between space-x-4">
           <h2 id="modal-title" class="text-lg font-semibold text-gray-800 dark:text-gray-100">{title}</h2>
-          <button
-            class="text-gray-500 hover:text-gray-700 dark:text-gray-300"
-            aria-label="Close"
-            on:click={close}
-          >
-            <!-- simple X -->
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
+          <div class={concat([
+            "flex",
+            "items-center",
+            "gap-3",
+          ])}>
+            <button
+              class={concat([
+                "w-6",
+                "h-full",
+                "flex",
+                "items-center",
+                "fill-none",
+                "stroke-[#222034]",
+                "dark:stroke-[#DDDFCB]",
+                "hover:stroke-[#45283c]",
+                "dark:hover:stroke-[#BAD7C3]",
+                "focus:stroke-[#663931]",
+                "dark:focus:stroke-[#99C6CE]",
+                "active:stroke-[#663931]",
+                "dark:active:stroke-[#99C6CE]",
+              ])}
+              on:click={shareOnClick}
+            >
+              <svg viewBox="0 0 517 403">
+                <use xlink:href="share-icon.svg#root" href="share-icon.svg#root" />
+              </svg>
+            </button>
+            <button
+              class="text-gray-500 hover:text-gray-700 dark:text-gray-300"
+              aria-label="Close"
+              on:click={close}
+            >
+              <!-- simple X -->
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
         </div>
 
         <div class={concat([
