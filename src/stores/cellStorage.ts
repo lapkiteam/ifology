@@ -1,5 +1,5 @@
 import update from "immutability-helper"
-import { Deferred, UnionCase, Result } from "@fering-org/functional-helper"
+import { Deferred, UnionCase, Result, Option } from "@fering-org/functional-helper"
 import { pipeInto } from "ts-functional-pipe"
 
 import CellData from "./cellData"
@@ -44,8 +44,16 @@ export namespace CellStorage {
               MarkdownItemParser.parse(rawMarkdown),
               result => Result.reduce(
                 result,
-                ok => Result.mkOk(
-                  CellData.ofMarkdownItem(ok)
+                ok => pipeInto(
+                  CellData.ofMarkdownItem(ok),
+                  cellData => Option.reduce(
+                    cellData.id,
+                    () => cellData,
+                    () => update(cellData, {
+                      id: { $set: id },
+                    })
+                  ),
+                  Result.mkOk,
                 ),
                 err => Result.mkError<CellDataError>(
                   UnionCase.create("MarkdownItemParserError", err)
@@ -127,8 +135,8 @@ export namespace CellStorage {
           case "Loaded":
             return item.fields
           case "ToLoad":
-            const url = item.fields
-            loadItem(url, updatedItem =>
+            const fileName = item.fields
+            loadItem(fileName, updatedItem =>
               updating(index, Deferred.resolved(
                 updatedItem
               ))
