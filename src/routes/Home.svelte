@@ -62,22 +62,12 @@
   }
 </script>
 
-<div class={concat([
-  "size-full",
-  "px-2",
-  "flex",
-  "flex-col",
-  "items-center",
-  "gap-[2px]",
-  "overflow-y-auto",
-])}>
-  <Table
-    cells={$cellsStore}
-    onClick={cellIndex => {
-      modalOpen(cellIndex)
-    }}
-  />
-</div>
+<Table
+  cells={$cellsStore}
+  onClick={cellIndex => {
+    modalOpen(cellIndex)
+  }}
+/>
 <Modal
   bind:open={modalOpened}
   bind:title={modalTitle}

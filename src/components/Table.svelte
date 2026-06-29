@@ -15,7 +15,6 @@
 
 <div class={concat([
   "w-full",
-  "h-full",
   "grid",
   "grid-cols-[repeat(auto-fill,minmax(165px,1fr))]",
   "gap-x-2",
