@@ -31,8 +31,7 @@
 </script>
 
 <div class={concat([
-  "px-3",
-  "pb-3",
+  "size-full",
   "flex",
   "flex-col",
   "overflow-y-auto",

@@ -6,6 +6,7 @@
 
 <nav
   class={concat([
+    "shrink-0",
     "w-full",
     "h-[55px]",
     "px-[8px]",
