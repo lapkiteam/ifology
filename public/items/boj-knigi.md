@@ -1,5 +1,6 @@
 ---
 title: Бой-книги
+image: ./items/crying-wojak-in-mask.webp
 tags:
   - книги-игры
   - wojak
