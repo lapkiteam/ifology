@@ -1,4 +1,4 @@
 ---
-image: ./items/renpy.png
+image: ./items/renpy.webp
 title: RenPy
 ---
