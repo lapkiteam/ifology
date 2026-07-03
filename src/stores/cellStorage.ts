@@ -101,6 +101,7 @@ export namespace CellStorage {
         "apero",
         "authors-guild",
         "axma",
+        "boj-knigi",
         "choices",
         "furq",
         "gamebook",
