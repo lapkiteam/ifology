@@ -1,10 +1,10 @@
 <script lang="ts">
   import { type Option } from "@fering-org/functional-helper"
 
-  import { concat } from "../lib/utils"
-  import { type CellStorage } from "../stores/cellStorage"
-  import Result from "./Result.svelte"
-  import Deferred from "./Deferred.svelte"
+  import { concat } from "../../lib/utils"
+  import { type CellStorage } from "../../stores/cellStorage"
+  import Result from "../../components/Result.svelte"
+  import Deferred from "../../components/Deferred.svelte"
   import Cell from "./Cell.svelte"
 
   export let cells: CellStorage

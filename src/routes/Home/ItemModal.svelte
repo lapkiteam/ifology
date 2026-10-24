@@ -2,12 +2,12 @@
   import { Option } from "@fering-org/functional-helper"
   import { push } from "svelte-spa-router"
 
-  import { concat } from "../lib/utils"
-  import { type CellIndex } from "../stores/cellStorage"
-  import cellsStore from "../stores/cellsStore"
-  import Modal from "./Modal.svelte"
-  import Markdown from "./Markdown.svelte"
-  import type CellData from "../stores/cellData"
+  import { concat } from "../../lib/utils"
+  import { type CellIndex } from "../../stores/cellStorage"
+  import cellsStore from "../../stores/cellsStore"
+  import Modal from "../../components/Modal.svelte"
+  import Markdown from "../../components/Markdown.svelte"
+  import type CellData from "../../stores/cellData"
 
   export let state: Option<CellIndex> = Option.mkNone()
   export let close: () => void
