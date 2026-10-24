@@ -9,10 +9,10 @@
   import Markdown from "./Markdown.svelte"
   import type CellData from "../stores/cellData"
 
-  export let modalState: Option<CellIndex> = Option.mkNone()
+  export let state: Option<CellIndex> = Option.mkNone()
   export let close: () => void
 
-  function modalStateReduce(
+  function stateReduce(
     modalState: Option<CellIndex>,
     mapping: (cellData: CellData) => string,
   ) {
@@ -36,28 +36,28 @@
     )
   }
 
-  $: modalOpened = Option.isSome(modalState)
+  $: opened = Option.isSome(state)
 
-  $: id = modalStateReduce(modalState, cellData =>
+  $: id = stateReduce(state, cellData =>
     cellData.id || ""
   )
 
-  $: modalTitle = modalStateReduce(modalState, cellData =>
+  $: title = stateReduce(state, cellData =>
     cellData.title || ""
   )
 
-  $: modalImage = modalStateReduce(modalState, cellData =>
+  $: image = stateReduce(state, cellData =>
     cellData.imageSrc || ""
   )
 
-  $: modalDescription = modalStateReduce(modalState, cellData =>
+  $: description = stateReduce(state, cellData =>
     cellData.description || "Описание отсутствует"
   )
 </script>
 
 <Modal
-  bind:open={modalOpened}
-  bind:title={modalTitle}
+  bind:open={opened}
+  bind:title={title}
   on:close={close}
   shareOnClick={() => {
     push(`/items/${id}`)
@@ -72,12 +72,12 @@
         "h-32",
         "object-contain",
       ])}
-      src={modalImage}
+      src={image}
       alt=""
     >
   </div>
   <div class="mt-2">
-    <Markdown content={modalDescription} />
+    <Markdown content={description} />
   </div>
   <button slot="secondary" class="px-3 py-1 rounded border" on:click={close}>
     Закрыть

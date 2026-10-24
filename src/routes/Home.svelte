@@ -24,6 +24,6 @@
   }}
 />
 <ItemModal
-  bind:modalState={modalState}
+  bind:state={modalState}
   close={modalClose}
 />
