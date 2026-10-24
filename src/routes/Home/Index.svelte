@@ -1,10 +1,10 @@
 <script lang="ts">
   import { Option } from "@fering-org/functional-helper"
 
-  import { type CellIndex } from "../stores/cellStorage"
-  import cellsStore from "../stores/cellsStore"
-  import Table from "../components/Table.svelte"
-  import ItemModal from "../components/ItemModal.svelte"
+  import { type CellIndex } from "../../stores/cellStorage"
+  import cellsStore from "../../stores/cellsStore"
+  import Table from "./Table.svelte"
+  import ItemModal from "./ItemModal.svelte"
 
   let modalState: Option<CellIndex> = Option.mkNone()
 
