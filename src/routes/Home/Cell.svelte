@@ -3,7 +3,7 @@
 
   import { concat } from "../../lib/utils"
 
-  export let description: string
+  export let description: Option<string>
   export let imageSrc: Option<string>
   export let onClick: Option<() => void> = undefined
   export let onDrop: Option<() => void> = undefined
@@ -46,12 +46,14 @@
       "border-black",
     ])} />
   {/if}
-  <div class={concat([
-    "w-full",
-    "text-lg",
-    "leading-[17px]",
-    "text-center",
-  ])}>
-    {description}
-  </div>
+  {#if description !== undefined}
+    <div class={concat([
+      "w-full",
+      "text-lg",
+      "leading-[17px]",
+      "text-center",
+    ])}>
+      {description}
+    </div>
+  {/if}
 </button>
