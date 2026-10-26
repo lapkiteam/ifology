@@ -1,9 +1,16 @@
-<script lang="ts">
+<script lang="ts" generics="T">
   import { type Deferred } from "@fering-org/functional-helper"
 
   import { concat } from "../lib/utils"
 
-  export let deferred: Deferred<any>
+	interface $$Slots {
+    default: {
+      // Without this explicit specification, the type of the `resolved` variable in `let:resolved` is defined as `T | undefined`
+      resolved: T
+    }
+  }
+
+  export let deferred: Deferred<T>
 </script>
 
 {#if deferred.case === "Resolved"}
