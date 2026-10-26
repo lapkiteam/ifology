@@ -1,9 +1,15 @@
-<script lang="ts">
+<script lang="ts" generics="Ok">
   import { type Result } from "@fering-org/functional-helper"
 
   import { concat } from "../lib/utils"
 
-  export let item: Result<any, string>
+	interface $$Slots {
+    default: {
+      ok: Ok
+    }
+  }
+
+  export let item: Result<Ok, any>
 </script>
 
 {#if item[0] === "Error"}
