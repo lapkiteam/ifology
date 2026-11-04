@@ -9,6 +9,7 @@ export type CellData = {
   title: Option<string>
   imageSrc: Option<string>
   description: Option<string>
+  tags: Option<string[]>
 }
 
 export namespace CellData {
@@ -18,6 +19,7 @@ export namespace CellData {
       title: Option.mkNone(),
       imageSrc: Option.mkNone(),
       description: Option.mkNone(),
+      tags: Option.mkNone(),
     }
   }
 }
@@ -60,6 +62,9 @@ export namespace CellData {
           imageSrc: {
             $set: OptionExt.ofUnknown<string>(frontmatter.image)
           },
+          tags: {
+            $set: OptionExt.ofUnknown<string[]>(frontmatter.tags)
+          },
         })
       },
       cellData => update(cellData, {
@@ -73,6 +78,7 @@ export namespace CellData {
       Frontmatter: Result.mkOk({
         image: cellData.imageSrc,
         title: cellData.title,
+        tags: cellData.tags,
       }),
       Content: cellData.description || "",
     }
