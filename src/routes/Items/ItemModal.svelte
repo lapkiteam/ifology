@@ -2,11 +2,10 @@
   import { Option } from "@fering-org/functional-helper"
   import { push } from "svelte-spa-router"
 
-  import { concat } from "../../lib/utils"
   import { type CellIndex } from "../../stores/cellStorage"
   import cellsStore from "../../stores/cellsStore"
   import Modal from "../../components/Modal.svelte"
-  import Markdown from "../../components/Markdown.svelte"
+  import ItemModalContent from "./ItemModalContent.svelte"
   import type CellData from "../../stores/cellData"
 
   export let state: Option<CellIndex> = Option.mkNone()
@@ -63,22 +62,7 @@
     push(`/items/${id}`)
   }}
 >
-  <div class={concat([
-    "flex",
-    "justify-center",
-  ])}>
-    <img
-      class={concat([
-        "h-32",
-        "object-contain",
-      ])}
-      src={image}
-      alt=""
-    >
-  </div>
-  <div class="mt-2">
-    <Markdown content={description} />
-  </div>
+  <ItemModalContent {image} {description} />
   <button slot="secondary" class="px-3 py-1 rounded border" on:click={close}>
     Закрыть
   </button>
