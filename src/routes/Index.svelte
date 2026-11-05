@@ -1,12 +1,12 @@
 <script lang="ts">
   import Router, { type RouteDefinition } from "svelte-spa-router"
 
-  import Home from "./Home/Index.svelte"
-  import Items from "./Items.svelte"
+  import Items from "./Items/Index.svelte"
+  import Item from "./Item.svelte"
 
   export const routes: RouteDefinition = {
-    "/": Home,
-    "/items/:id": Items,
+    "/": Items,
+    "/items/:id": Item,
   }
 </script>
 
